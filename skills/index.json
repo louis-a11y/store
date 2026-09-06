@@ -1,0 +1,260 @@
+{
+  "skills": [
+    {
+      "name": "about-me",
+      "version": "f600208001",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "api-testing",
+      "version": "32c9b8758e",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "browser-automation",
+      "version": "2b84f64da1",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "computer-control",
+      "version": "315b06e1f1",
+      "files": [
+        "README.md",
+        "SKILL.md",
+        "docs/coordinate-system.md",
+        "docs/idea-run-workflow.md",
+        "docs/window-management.md"
+      ]
+    },
+    {
+      "name": "context-management",
+      "version": "ad95ea7492",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "controlmcp",
+      "version": "a3d29ac4ff",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "create-skill",
+      "version": "42d7bc82c0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "cross-compilation",
+      "version": "3e494c7dc0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "daily-routine",
+      "version": "cd589d80e0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "dev-workflow",
+      "version": "2d6cb3b7a5",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "dotfiles-backup",
+      "version": "455bf003e1",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "elf-binutils",
+      "version": "9dd6a946bf",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "error-analysis",
+      "version": "44f982e6f7",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "homebrew-management",
+      "version": "8a29727d56",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "kernel-debugging",
+      "version": "5a62b4cb9f",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "knowledge-base",
+      "version": "5667d86a7c",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "macos-automation",
+      "version": "ea715ef726",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "makefile-mastery",
+      "version": "3dfbbbc3c8",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "memory-notes",
+      "version": "93f26cc3fc",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "opencode-capabilities",
+      "version": "4120bc2d33",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "opencode-usage",
+      "version": "ac3a1dc6d0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "product-domain",
+      "version": "de670f1893",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "project-workflow",
+      "version": "ad3d11e3a2",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "prompt-engineering",
+      "version": "0a511bf65e",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "qemu-emulation",
+      "version": "48243bab47",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "rapid-prototyping",
+      "version": "a05239befa",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "regex-crafting",
+      "version": "cd3dc255a0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "session-handoff",
+      "version": "faaa4e9e7f",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "shell-productivity",
+      "version": "c54c0bec20",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "subagent-delegation",
+      "version": "3f1e418d98",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "technical-domain",
+      "version": "d6571ab2dc",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "terse-communication",
+      "version": "b1a48730da",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "test-strategy",
+      "version": "59c5c67778",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "vite-workflow",
+      "version": "dbc308c15f",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "web-performance",
+      "version": "c98bceafb3",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "work-faster",
+      "version": "ea8ada377f",
+      "files": [
+        "SKILL.md"
+      ]
+    }
+  ]
+}
