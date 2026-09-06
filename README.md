@@ -9,7 +9,7 @@ A curated pack of 36 [opencode](https://opencode.ai) skills, written and battle-
 ```jsonc
 {
   "skills": [
-    "https://raw.githubusercontent.com/<you>/<this-repo>/main/skills"
+    "https://raw.githubusercontent.com/louis-a11y/store/main/skills"
   ]
 }
 ```
@@ -19,7 +19,7 @@ Skills are cached and refresh automatically when a skill's content changes (vers
 **Manual** — clone and copy straight into your global skills dir:
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/louis-a11y/store.git
 mkdir -p ~/.config/opencode/skills
 cp -R skills/* ~/.config/opencode/skills/
 ```
