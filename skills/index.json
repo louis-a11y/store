@@ -278,6 +278,13 @@
       "files": [
         "SKILL.md"
       ]
+    },
+    {
+      "name": "zz-test2",
+      "version": "51943706ee",
+      "files": [
+        "SKILL.md"
+      ]
     }
   ]
 }
