@@ -19,4 +19,5 @@ else
 fi
 
 python3 "$REPO/scripts/sync.py"
-echo "trashed: $NAME (restore: git mv trash/$NAME skills/$NAME)"
+echo "trashed: $NAME — out of the store/catalog; installed copies keep working until you rm them"
+echo "restore: git mv trash/$NAME skills/$NAME"

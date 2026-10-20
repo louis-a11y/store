@@ -85,18 +85,9 @@ def main() -> int:
     trashed = skill_dirs(TRASH) if TRASH.is_dir() else {}
     actions = []
 
-    for name in sorted(trashed):  # in the trash: deleted everywhere
-        if name in live:
-            if live[name].is_symlink():
-                live[name].unlink()
-                print(f"* {name}: unlinked symlink (target kept at its original location)")
-            else:
-                shutil.rmtree(live[name])
-            actions.append(f"* {name} (removed from live — it is in the trash)")
-        if name in store:
-            shutil.rmtree(store[name])
-            actions.append(f"* {name} (removed from store — it is in the trash)")
-        state.pop(name, None)
+    # NOTE: trashed skills are only removed from the store (trash.sh does the move).
+    # Live folders are never touched by a deletion — a local rm is what removes it,
+    # and it sticks because the store copy is already gone.
 
     for name in sorted(set(live) | set(store)):
         if name in trashed:

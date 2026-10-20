@@ -147,8 +147,9 @@ Two-way **recovery** sync (launchd job `com.louis-a11y.skillstore-sync`: hourly 
 **Permanent deletion has exactly one path** — the trash:
 
 ```bash
-bash scripts/trash.sh SKILL-NAME        # gone from this machine, the store, everywhere
-git mv trash/SKILL-NAME skills/SKILL-NAME   # undo: comes back everywhere
+bash scripts/trash.sh SKILL-NAME            # out of the store + catalog; already-installed copies keep working
+rm -rf ~/.config/opencode/skills/SKILL-NAME # optional: remove it from this machine (sticks — nothing restores it)
+git mv trash/SKILL-NAME skills/SKILL-NAME   # undo the trash: back in the catalog
 ```
 
 ## Install on another Mac
