@@ -101,6 +101,42 @@ python3 scripts/build-index.py   # regenerates skills/index.json with fresh cont
 
 Commit and push — opencode clients refresh their cached copies automatically.
 
+## For app developers (one-click integration)
+
+Your software has three ways to install skills from this store, no npm publishing needed:
+
+**1. Bulk — one request gets everything.** Fetch, extract, done:
+
+```bash
+curl -fsSL https://codeload.github.com/louis-a11y/store/tar.gz/refs/heads/main | tar -xz
+# skills/ contains every skill, ready to copy into any agent's skills dir
+```
+
+**2. Catalog API — selective installs with caching.** `skills/index.json` lists every skill with a content-hash `version` and its file list:
+
+```json
+{ "skills": [ { "name": "dev-workflow", "version": "a1b2c3d4e5", "files": ["SKILL.md"] } ] }
+```
+
+- Catalog: `https://raw.githubusercontent.com/louis-a11y/store/main/skills/index.json`
+- Files: `https://raw.githubusercontent.com/louis-a11y/store/main/skills/<name>/<file>`
+
+Keep the version as your cache key — when it changes, re-download that skill.
+
+**3. CLI — shell out:**
+
+```bash
+bash scripts/install.sh --list                  # available skill names
+bash scripts/install.sh --to DIR name1 name2    # install selected into DIR
+bash scripts/install.sh --to DIR                # install all
+```
+
+Target any agent's directory — `~/.config/opencode/skills`, `~/.claude/skills`, `~/.agents/skills`, or a project-local `.opencode/skills`. The format is identical everywhere.
+
+## Sync
+
+The store auto-syncs daily from the source machine (launchd job `com.louis-a11y.skillstore-sync`, log at `/tmp/skillstore-sync.log`). Manual sync: `python3 scripts/sync.py` — copies new/changed live skills, rebuilds the catalog, publishes only when something changed.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).

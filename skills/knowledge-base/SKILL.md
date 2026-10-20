@@ -9,10 +9,11 @@ description: Use when the knowledge base is involved — querying what we know a
 > |---|---|---|
 > | KB root | `~/knowledge-base/` | `KB_ROOT=` (skill body below) |
 > | Ingest at session start | on | set `INGEST_AT_START=false` |
-> | Ingest lookback | 24h | `INGEST_HOURS=24` |
-> | Promote threshold | 3 queries | `PROMOTE_AT=3` |
+> | Ingest lookback | all | `INGEST_HOURS=all` (all = entire DB history; set `24` to limit) |
+> | Promote threshold | 2 sessions | `PROMOTE_AT=2` (topic seen in ≥2 distinct sessions → skill candidate) |
 > | Dedupe | exact-match skip | make it fuzzy if wanted |
-> | Terse entries | on | flip `VERBOSE=false` → biased to prose |
+> | Terse entries | on | `VERBOSE=false` → entries stay one-line in KB |
+> | Verbose log | `~/kb-verbose.log` | every `kb append` is ALSO mirrored in long form via `kb log` |
 >
 > The rest of this file is the learning loop. Edit behavior here, not in app code.
 
@@ -23,7 +24,7 @@ READ what's known, USE it to ground answers, APPEND what's new, PROMOTE what's r
 
 ## 1. READ — at session start
 
-- Run `kb ingest INGEST_HOURS` (unless INGEST_AT_START=false) to see recent sessions.
+- Run `kb ingest INGEST_HOURS` (unless INGEST_AT_START=false) to see recent sessions. Default is `kb ingest all` — the whole session history, no time limit.
 - Before answering anything project-specific, `kb search <topic-keyword>` (cheap) or read the topic dir.
 - If a topic exists, ground the answer in it BEFORE improvising.
 - Cost rule: one `kb search` ≈ one grep. Don't fear it; do fear full `kb show` on large topics (cat only the file you need via `kb cat <topic> facts|decisions|learnings`).
@@ -46,13 +47,15 @@ Append ONLY what survives the session and helps a FUTURE session:
 
 Command: `kb append <topic> <kind> <text>` — dedupes exact matches, creates the topic on first use.
 
+**Terse + verbose pairing**: KB entries stay terse one-liners. After every `kb append`, also write the verbose/prose version (full context, why, what it affects) to the home-folder log with `kb log <verbose text>` → appends timestamped to `~/kb-verbose.log`. KB stays greppable; the verbose log keeps the story.
+
 DO NOT append: transient state, logs, code, "we ran test X it passed" (that's a session fact, not durable).
 
 ## 4. PROMOTE — topic -> skill
 
-- Count real-session queries per topic (informally: if the AI reaches for the same topic across ≥ PROMOTE_AT distinct sessions, it's recurring).
+- Count real-session queries per topic (informally: if the AI reaches for the same topic across ≥ PROMOTE_AT distinct sessions, it's recurring). Threshold default is 2 — one query is curiosity, two is recurring.
 - `kb promote <topic>` drafts a candidate to `inbox/promotions/`.
-- **NEVER auto-create a skill.** Propose to the user, one line: "topic X queried 3× → want it as a skill?" — approval required (user rule: irreversible/structure-changing things need asking).
+- **NEVER auto-create a skill.** Propose to the user, one line: "topic X queried 2× → want it as a skill?" — approval required (user rule: irreversible/structure-changing things need asking).
 
 ## 5. PRUNE — hygiene
 

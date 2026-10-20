@@ -15,6 +15,14 @@
       ]
     },
     {
+      "name": "background-job",
+      "version": "56636ccb29",
+      "files": [
+        ".DS_Store",
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "browser-automation",
       "version": "2b84f64da1",
       "files": [
@@ -103,6 +111,13 @@
       ]
     },
     {
+      "name": "image-reading",
+      "version": "237d19ebd1",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "kernel-debugging",
       "version": "5a62b4cb9f",
       "files": [
@@ -111,7 +126,7 @@
     },
     {
       "name": "knowledge-base",
-      "version": "5667d86a7c",
+      "version": "2288ca2493",
       "files": [
         "SKILL.md"
       ]
@@ -148,6 +163,14 @@
       "name": "opencode-usage",
       "version": "ac3a1dc6d0",
       "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "orchestrator",
+      "version": "aea265b50d",
+      "files": [
+        ".DS_Store",
         "SKILL.md"
       ]
     },
@@ -251,7 +274,7 @@
     },
     {
       "name": "work-faster",
-      "version": "ea8ada377f",
+      "version": "193e0d12b1",
       "files": [
         "SKILL.md"
       ]

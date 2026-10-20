@@ -1,6 +1,6 @@
 ---
 name: work-faster
-description: Use when you want to work faster and more efficiently. Provides techniques for parallel execution, context optimization, and task decomposition. Triggers: 'work faster', 'speed up', 'be more efficient', 'optimize performance'.
+description: Use when you want to work faster and more efficiently. Provides techniques for parallel execution, context optimization, and task decomposition. Always triggers
 ---
 
 # Work Faster
@@ -33,6 +33,44 @@ task(..., prompt="Find error handling")
 - Search operations (different patterns)
 - Explore/librarian agents (always background)
 - Independent edits (non-overlapping files)
+
+#### 1a. Custom sub-agent fan-out
+
+The `parallel-workers` skill defines *what* to delegate and to whom. This section is the *how*:
+fire every custom sub-agent in a single wave, each with `run_in_background=true`, then keep
+working on non-overlapping steps until their results land.
+
+Custom sub-agents available (defined in `opencode.jsonc`):
+
+| Agent | Delegate when |
+|---|---|
+| `architect` | Plan structure, map dependencies, high-level design |
+| `coder` | Write or refactor code files |
+| `sysadmin` | Run shell commands, manage background tasks |
+| `reviewer` | Inspect logs, review diffs, double-check output |
+| `tester` | Run test suites, check for breakages |
+| `docs` | Update READMEs, docstrings, API specs |
+
+```typescript
+// One wave, all independent tracks, no waiting in between:
+task(subagent_type="architect", run_in_background=true, prompt="Plan the auth module layout")
+task(subagent_type="coder",     run_in_background=true, prompt="Implement JWT middleware per the plan")
+task(subagent_type="sysadmin",  run_in_background=true, prompt="Spin up the local dev DB")
+task(subagent_type="docs",      run_in_background=true, prompt="Draft the auth API reference")
+// reviewer + tester come AFTER coder lands — they depend on the code existing.
+
+// Dependent wave (only after coder returns):
+task(subagent_type="tester",   run_in_background=true, prompt="Test the JWT middleware")
+task(subagent_type="reviewer", run_in_background=true, prompt="Review the auth diff")
+```
+
+**Rules that make fan-out actually fast:**
+- **Wave, don't chain.** Fire all *independent* agents in one message; only sequence true dependencies.
+- **Give each agent a disjoint surface.** Never two agents editing the same file — that is a conflict, not parallelism.
+- **Self-contained prompts.** A fresh child has zero context: include paths, goal, and success criteria.
+- **One line `task_summary` per spawn** so the UI shows what was delegated.
+- **Don't poll.** Background children notify on completion; go do other work meanwhile.
+- **Match agent to work.** Planning → `architect`; writing → `coder`; shell → `sysadmin`; verification → `tester`/`reviewer`; prose → `docs`.
 
 ### 2. Context Management
 
@@ -92,7 +130,11 @@ task(category="deep", prompt="Write auth tests")
 
 ### 6. Sub-Agent Architecture
 
-**Use specialized agents:**
+**Two tiers of agents — use both:**
+
+*Custom (defined in `opencode.jsonc`, see §1a):* `architect`, `coder`, `sysadmin`, `reviewer`, `tester`, `docs` — for concrete delegated work.
+
+*Built-in (omo/opencode):*
 - `explore` - Codebase grep (cheap, fast)
 - `librarian` - External docs (cheap, fast)
 - `oracle` - Hard problems (expensive, use sparingly)
@@ -100,10 +142,14 @@ task(category="deep", prompt="Write auth tests")
 
 **Fire explore/librarian as background, continue with non-overlapping work.**
 
+**Coordination with `parallel-workers`:** that skill owns the *policy* (break down work, delegate simultaneously, combine results). This skill owns the *mechanics* (background flags, wave batching, disjoint surfaces, don't poll). When both trigger, follow parallel-workers' rules and use §1a for execution shape.
+
 ## Quick Checklist
 
 Before starting work:
 - [ ] Can any steps run in parallel?
+- [ ] Which of my 6 custom agents (`architect`/`coder`/`sysadmin`/`reviewer`/`tester`/`docs`) own which track?
+- [ ] Is each delegated track on a disjoint surface (no shared files)?
 - [ ] Am I loading only what I need?
 - [ ] Is this task decomposed properly?
 - [ ] Am I using the right model/category?
@@ -113,6 +159,8 @@ Before starting work:
 
 - Reading full files when you need one function
 - Sequential execution of independent tasks
+- Two agents editing the same file (conflict, not parallelism)
+- Delegating without a self-contained prompt (child has no context)
+- Polling background tasks (wait for notification)
 - Over-exploring before starting work
 - Using expensive models for simple tasks
-- Polling background tasks (wait for notification)
