@@ -135,7 +135,7 @@ Target any agent's directory — `~/.config/opencode/skills`, `~/.claude/skills`
 
 ## Sync
 
-The store auto-syncs daily from the source machine (launchd job `com.louis-a11y.skillstore-sync`, log at `/tmp/skillstore-sync.log`). Manual sync: `python3 scripts/sync.py` — copies new/changed live skills, rebuilds the catalog, publishes only when something changed.
+The store **two-way syncs** daily (launchd job `com.louis-a11y.skillstore-sync`, hourly + at login, log at `/tmp/skillstore-sync.log`). Manual sync: `python3 scripts/sync.py`. Each run pulls from GitHub first, so skills added or edited on another device land in the live skills folder here on the next run. Edits made here get pushed back. If a skill changed on both sides, the local copy wins and a warning is logged — nothing is overwritten silently. Local deletions are never resurrected.
 
 ## License
 
