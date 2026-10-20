@@ -137,6 +137,14 @@ def main() -> int:
     STATE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
 
     if not run("git", "status", "--porcelain"):
+        ahead = run("git", "rev-list", f"origin/{BRANCH}..HEAD", "--count")
+        if ahead != "0":
+            try:  # pending commits exist (e.g. manual edits committed at start)
+                run("git", "push", "origin", BRANCH)
+                print("published: pending commits")
+            except subprocess.CalledProcessError:
+                print("! push failed (did another device push in the meantime?) — will retry next run")
+            return 0
         print("store already in sync")
         return 0
     run("git", "add", "-A")
