@@ -30,13 +30,9 @@
     },
     {
       "name": "computer-control",
-      "version": "8ab42d3ea4",
+      "version": "a42e0ec355",
       "files": [
-        "README.md",
-        "SKILL.md",
-        "docs/coordinate-system.md",
-        "docs/idea-run-workflow.md",
-        "docs/window-management.md"
+        "SKILL.md"
       ]
     },
     {
@@ -48,7 +44,7 @@
     },
     {
       "name": "controlmcp",
-      "version": "85882ce0e2",
+      "version": "4eb6a081a9",
       "files": [
         "SKILL.md"
       ]
