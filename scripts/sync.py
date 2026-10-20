@@ -118,6 +118,10 @@ def main() -> int:
                     actions.append(f"-{name} (updated from store)")
                     state[name] = sh
 
+    # prune state entries for skills gone from both sides (nothing left to protect)
+    for stale in [n for n in state if n not in live and n not in store]:
+        del state[stale]
+
     # 3. rebuild catalog, publish only if something changed
     run(sys.executable, str(REPO / "scripts/build-index.py"))
     STATE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
