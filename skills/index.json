@@ -278,6 +278,13 @@
       "files": [
         "SKILL.md"
       ]
+    },
+    {
+      "name": "zz-test-mirror",
+      "version": "4684976464",
+      "files": [
+        "SKILL.md"
+      ]
     }
   ]
 }
