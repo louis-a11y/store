@@ -3,9 +3,6 @@ name: makefile-mastery
 description: Use when writing, editing, or debugging GNU Makefiles — variables, automatic vars, pattern rules, phony targets, dependency tracking, link order. Grounded in vibeos/Makefile conventions.
 ---
 
-## Goal
-Write and debug GNU Makefiles confidently: correct variable/function syntax, automatic variables, dependency generation, parallel builds, and the linking traps specific to kernel builds.
-
 ## vibeos/Makefile conventions (match these)
 
 - Variables uppercase: `CC = i686-elf-gcc`, `ASM = nasm`, `LD = i686-elf-ld`
@@ -17,14 +14,12 @@ Write and debug GNU Makefiles confidently: correct variable/function syntax, aut
 ## Core syntax (quick reference)
 
 ```makefile
-# Simple rule: target: prerequisites
 kernel.o: kernel.c vbe_thunk.h
 	$(CC) $(CFLAGS) kernel.c -o kernel.o
 
-# Automatic variables
 kernel.elf: entry.o kernel.o
-	$(LD) $^ -o $@          # $@ = target, $^ = ALL prereqs, $< = FIRST prereq
-	@echo "built $@"        # @ = silent
+	$(LD) $^ -o $@
+	@echo "built $@"
 ```
 
 | Variable | Meaning |
@@ -37,14 +32,12 @@ kernel.elf: entry.o kernel.o
 ## Common constructs
 
 ```makefile
-# Wildcard + pattern rule for many sources
 SRCS := $(wildcard src/*.c)
 OBJS := $(SRCS:.c=.o)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $< -o $@
 
-# Phony (always run) targets
 .PHONY: all clean run
 
 # Conditionals
@@ -60,22 +53,20 @@ endif
 | Dry run (print, don't run) | `make -n` |
 | See variables | `make -p \| grep -A1 <VAR>` or `$(info VAR=$(VAR))` |
 | Force rebuild one target | `make -B kernel.o` |
-| Parallel build | `make -j$(sysctl -n hw.ncpu)` (macOS!) |
+| Parallel build | `make -j$(sysctl -n hw.ncpu)` (macOS; `nproc` doesn't exist without coreutils) |
 | Don't delete intermediate files | `make -o file` or mark `.SECONDARY:` |
 | Explain why target remade | `make -d` (verbose debug) |
 
 ## Kernel-build-specific traps
 
 - **Link order matters**: `entry.o` FIRST (contains entry point / `_start`). `$(LD) kernel.o entry.o` breaks boot. Order = entry, then deps.
-- **`-nostdlib` + no libc**: the final link must be `-nostdlib` or the ld will complain about missing `_start`/crt0.
+- **`-nostdlib` + no libc**: final link must be `-nostdlib` or ld complains about missing `_start`/crt0.
 - **Missing headers** = stale objects: add header deps (`kernel.o: kernel.c vbe_thunk.h`), or generate auto-deps (`-MMD -MP` in CFLAGS, include `*.d`).
-- **vbe_thunk.h generated file**: its rule (`xxd -i vbe_thunk.bin > vbe_thunk.h`) must run BEFORE kernel.o compiles — declare it as a prerequisite (already in Makefile).
-- **Parallel builds + generated headers**: `-j` can race rule order unless the dependency is declared. Always list the generated header as a prereq of the .o that includes it.
-- **`truncate -s 32M`** for os.img: only works on files, not pipes; sequence `cat > os.img && truncate` is correct.
+- **Generated header `vbe_thunk.h`** (rule `xxd -i vbe_thunk.bin > vbe_thunk.h`): must exist BEFORE kernel.o compiles — declare it as a prerequisite of kernel.o (already in Makefile); otherwise `-j` races rule order.
 
 ## Pitfalls
 
 - Tab vs spaces: recipe lines MUST start with an actual TAB character. Copy-paste from chat often produces spaces → "missing separator" error.
 - `make` treats `run`/`debug`/`iso` as file targets unless listed in `.PHONY` — if a file named `run` exists, the target never executes.
-- On macOS multi-core: `-j$(sysctl -n hw.ncpu)` (not `nproc` — doesn't exist without coreutils).
-- `.NOTPARALLEL:` if two rules write the same output — rare here, but the os.img cat+truncate pair is a sequence, don't parallelize it.
+- **`truncate -s 32M`** for os.img: only works on files, not pipes; sequence `cat > os.img && truncate` is correct.
+- `.NOTPARALLEL:` if two rules write the same output — the os.img `cat`+`truncate` pair is a sequence, don't parallelize it.

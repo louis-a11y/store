@@ -3,9 +3,6 @@ name: shell-productivity
 description: Use when working in the shell — zsh aliases, PATH problems, functions, history, command-line speed. Covers the user's zsh on macOS (darwin, Apple Silicon), including the oc/oc-reload workflow.
 ---
 
-## Goal
-Move fast in zsh: alias/shortcut workflow, PATH hygiene, history tricks, and avoiding shell footguns.
-
 ## The user's setup (verify, don't assume)
 
 - `~/.zshrc` currently has:
@@ -28,7 +25,6 @@ Move fast in zsh: alias/shortcut workflow, PATH hygiene, history tricks, and avo
 | Edit current line | `Ctrl+X Ctrl+E` (opens $EDITOR) |
 | Re-run last command | `!!` |
 | Last arg of last command | `!$` |
-| Glob: all files in dir | `*` |
 | Glob: recursive | `**/*.js` |
 | Brace expansion | `{1..10}`, `{a,b,c}.txt` |
 

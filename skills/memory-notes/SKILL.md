@@ -3,10 +3,9 @@ name: memory-notes
 description: Use when recording or recalling project knowledge in opencode — what to store in memory (opencode-mem), what NOT to store, search cadence, pruning stale notes, and where memory complements skills.
 ---
 
-## Goal
-Use the memory system (opencode-mem plugin + memory tool) as a durable project brain: store the right facts, retrieve them fast, and prune what goes stale — without competing with skills.
-
 ## What memory is for vs what skills are for
+
+Memory = opencode-mem plugin + `memory` tool — a durable, per-project project brain.
 
 | Thing | Storage |
 |---|---|
@@ -15,7 +14,7 @@ Use the memory system (opencode-mem plugin + memory tool) as a durable project b
 | Transient state (in-progress todos, current diff) | Session only — NOT memory |
 | Code | Files — never memory |
 
-The rule of thumb: memory = facts and decisions you'd want on ANY task; skills = procedures that trigger on keywords.
+Rule of thumb: memory = facts and decisions you'd want on ANY task; skills = procedures that trigger on keywords.
 
 ## What to store (high value)
 
@@ -47,5 +46,4 @@ The rule of thumb: memory = facts and decisions you'd want on ANY task; skills =
 
 - **Storing reactions** ("that was annoying") — worthless in 2 weeks; store the underlying decision.
 - **Storing what the code says** — the code IS the source of truth; memory is for what the code doesn't say (why, what was decided, who prefers what).
-- **Never trusting memory over the live system**: if memory and reality disagree (version, path), reality wins — update memory.
 - **Silent drift**: memory that's never pruned becomes a distraction — stale notes get searched and mislead. Prune on change, not annually.

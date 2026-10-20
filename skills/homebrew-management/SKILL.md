@@ -3,9 +3,6 @@ name: homebrew-management
 description: Use when managing macOS packages with Homebrew — installing, updating, cleaning up, troubleshooting brew errors, formulae vs casks, services. User's brew lives at /opt/homebrew (Apple Silicon).
 ---
 
-## Goal
-Keep Homebrew healthy, install/remove packages correctly, and fix common brew failures on Apple Silicon.
-
 ## Core commands
 
 | Command | Purpose |
@@ -31,14 +28,14 @@ Keep Homebrew healthy, install/remove packages correctly, and fix common brew fa
 - **Formula vs cask**: `brew install` = CLI/daemons. `--cask` = GUI apps in /Applications. Same name can exist as both (e.g. `docker` vs `docker --cask`).
 - **Why run `brew doctor` first**: it catches clobbered dirs, permission issues, duplicate binaries — the cause of most "brew is broken" reports.
 - **Cleanup cadence**: `brew cleanup --prune=7` keeps last 7 days of downloads. Old versions pile up silently.
-- **Checking what auto-updates**: `brew autoupdate` if installed; otherwise brew auto-updates before every install by default (disable with `HOMEBREW_NO_AUTO_UPDATE=1`).
-- **Degrading/edge installs**: `brew install <pkg>@<version>` for versioned formulae (e.g. `node@20`); pin with `<tap>/<pkg>`.
+- **Auto-updates**: `brew autoupdate` if installed; otherwise brew auto-updates before every install (disable with `HOMEBREW_NO_AUTO_UPDATE=1`).
+- **Versioned formulae**: `brew install <pkg>@<version>` (e.g. `node@20`); pin with `<tap>/<pkg>`.
 
 ## Troubleshooting (Apple Silicon)
 
 - **"zsh: command not found" but installed** → /opt/homebrew/bin not on PATH. Fix: add `eval "$(/opt/homebrew/bin/brew shellenv)"` to ~/.zshrc (or ensure /opt/homebrew/bin precedes /usr/bin).
 - **Permission errors on /opt/homebrew** → `sudo chown -R $(whoami) /opt/homebrew` (own the prefix; avoid running brew with sudo).
-- **Bottle "incompatible architecture"** → running arm64 brew on an arm64 Mac is default; this error usually means an x86_64 Homebrew install exists. Check `which brew` → should be /opt/homebrew (arm64), not /usr/local (intel).
+- **Bottle "incompatible architecture"** → means an x86_64 Homebrew install exists; `which brew` should be /opt/homebrew (arm64), not /usr/local (intel).
 - **Stuck "Updating Homebrew..."** → `HOMEBREW_NO_AUTO_UPDATE=1 brew install <pkg>` skips it; or `git -C /opt/homebrew/Library/Taps/homebrew/homebrew-core fetch --prune`.
 - **"No available formula"** → tap missing: `brew tap homebrew/core` (rarely needed now) or the package moved — check `brew search`.
 

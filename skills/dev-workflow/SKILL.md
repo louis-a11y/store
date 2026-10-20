@@ -5,20 +5,17 @@ description: How this user wants development work done — general discipline fo
 
 # Dev Workflow (general discipline)
 
-## The user's operating principles
-1. **Act, don't ask** — routine coding actions need no confirmation. Only irreversible things (deletes, force-push, mass renames) get a question, and batch those into one question at most.
-2. **Senor-engineer output** — code should be indistinguishable from a senior dev's: match existing patterns, no AI slop, no excessive ceremony.
-3. **Terse communication** — no status updates, no "great question", no post-task summaries unless asked. Todos ARE the progress tracker.
+## Operating principles
+1. **Act, don't ask** — routine coding actions need no confirmation. Only irreversible things (deletes, force-push, mass renames) get a question, batched into one at most.
+2. **Senior-engineer output** — code indistinguishable from a senior dev's: match existing patterns, no AI slop, no excessive ceremony.
+3. **Terse communication** — no status updates, no post-task summaries unless asked. Todos ARE the progress tracker.
 
 ## Execution discipline
-1. **Plan first for non-trivial work**: 2+ steps → decompose into atomic todos (WHERE + HOW + WHY + expected RESULT per item). One item = 1-3 tool calls.
-2. **Parallelize**: independent reads/searches/tasks run simultaneously. Independent implementation units → delegate in parallel.
-3. **Match the codebase**: disciplined project → follow its conventions strictly. Chaotic project → propose a convention, ask once, then apply.
-4. **Verify as you go**:
-   - After edits: run `lsp_diagnostics` on changed files.
-   - At completion: run the project's build/test commands. Exit 0 + clean diagnostics = done.
-   - No evidence = not complete.
-5. **Fail fast, recover clean**: after 3 consecutive failed fix attempts → STOP, revert to last known-good, document, and consult (oracle/debugging route) instead of shotgun-debugging.
+1. **Plan first for non-trivial work**: 2+ steps → atomic todos (WHERE + HOW + WHY + expected RESULT per item; one item = 1-3 tool calls).
+2. **Parallelize**: independent reads/searches/tasks run simultaneously; independent implementation units → delegate in parallel.
+3. **Match the codebase**: disciplined project → follow conventions strictly. Chaotic → propose a convention, ask once, then apply.
+4. **Verify as you go**: after edits run `lsp_diagnostics` on changed files; at completion run the project's build/test commands. Exit 0 + clean diagnostics = done. No evidence = not complete.
+5. **Fail fast, recover clean**: 3 consecutive failed fix attempts → STOP, revert to last known-good, document, and consult (oracle/debugging route) instead of shotgun-debugging.
 
 ## Code quality bars (non-negotiable)
 - No type-error suppression (`as any`, `@ts-ignore`, `@ts-expect-error`).
@@ -27,15 +24,15 @@ description: How this user wants development work done — general discipline fo
 - **Bugfix rule**: fix minimally, never refactor while fixing.
 - Never commit unless the user explicitly asked. No force-push. Match the repo's commit style when committing.
 
-## Delegation rules (when working with subagents)
-- Delegate to the category that matches the domain (visual → visual-engineering, logic-heavy → ultrabrain, research-heavy → deep, trivial → quick).
-- Prompts must include: TASK (atomic goal) + EXPECTED OUTCOME + MUST DO + MUST NOT DO + CONTEXT (file paths, patterns to follow). Vague prompts are failures.
+## Delegation rules (subagents)
+- Delegate to the category matching the domain (visual → visual-engineering, logic-heavy → ultrabrain, research-heavy → deep, trivial → quick).
+- Prompt must include: TASK (atomic goal) + EXPECTED OUTCOME + MUST DO + MUST NOT DO + CONTEXT (file paths, patterns to follow). Vague prompts are failures.
 - After delegation: verify the result actually works and follows codebase patterns.
 
 ## When in doubt
-- If the request is ambiguous with 2x+ effort between interpretations → ask ONE question with a recommended default.
-- If the user's design is flawed → raise the concern concisely, propose an alternative, ask to proceed either way.
-- If a specialist exists (explore/librarian/oracle/debugging skills), use them instead of grinding alone.
+- Ambiguous request with 2x+ effort between interpretations → ask ONE question with a recommended default.
+- User's design is flawed → state the concern concisely, propose an alternative, ask to proceed either way.
+- A specialist exists (explore/librarian/oracle/debugging skills) → use it instead of grinding alone.
 
 ## Definition of done
 - [ ] Todos complete, each marked as it finished

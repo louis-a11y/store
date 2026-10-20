@@ -3,18 +3,15 @@ name: cross-compilation
 description: Use when building a cross compiler or compiling freestanding code — i686-elf-gcc/gcc/ld toolchain, why host clang/gcc is wrong for kernels, sysroot-less freestanding builds. Grounded in vibeos (i686-elf-gcc, build-toolchain.sh, -nostdlib -ffreestanding).
 ---
 
-## Goal
-Build and correctly use a cross toolchain (i686-elf-gcc family) for the vibeos kernel on macOS, and understand WHY host compilers break freestanding code.
-
 ## Why a cross compiler
 
 - macOS's clang/ld target Mach-O for x86_64 darwin — it cannot emit raw i386 ELF binaries that GRUB/Limine/nasm boots.
 - Host compiler injects: crt0/crti startup, stack protector, PIE, dynamic linking, libc headers — all poison for a kernel.
-- vibeos solves it with: `CC = i686-elf-gcc`, `ASM = nasm`, `LD = i686-elf-ld` + CFLAGS `-m32 -ffreestanding -fno-builtin -fno-stack-protector -nostdlib -nostdinc -c`.
+- vibeos solves it with: `CC = i686-elf-gcc`, `ASM = nasm`, `LD = i686-elf-ld` + the freestanding CFLAGS below.
 
 ## Toolchain state on this machine
 
-- The project has `build-toolchain.sh` — check it (read the script) before assuming tools exist.
+- The project has `build-toolchain.sh` — read the script before assuming tools exist.
 - Verify installed: `command -v i686-elf-gcc i686-elf-ld i686-elf-objdump` — if missing, run/confer with build-toolchain.sh.
 
 ## Baseline freestanding flags (match vibeos CFLAGS)
@@ -59,7 +56,7 @@ Or simpler: `brew install i686-elf-gcc` (formula exists for macOS) — prefer th
 ## Pitfalls
 
 - **Never mix**: `gcc -m32` on macOS produces Mach-O/LLVM weirdness — even `-m32` doesn't give you ELF. Use the i686-elf-* family end to end.
-- **`-nostdinc` means NO headers**: your kernel.c includes kernel.h/sdk.h from the project — include paths must be explicit (`-I.` etc.).
+- **`-nostdinc` means NO headers**: kernel.c includes kernel.h/sdk.h from the project — include paths must be explicit (`-I.` etc.).
 - **Link order** (see makefile-mastery): entry.o first, else entry point unresolved or wrong.
 - **as/ld naming**: on Sony macOS hosts, plain `as`/`ld` are the HOST ones — always use `i686-elf-as`/`i686-elf-ld` explicitly, or set CC/AS/LD vars (vibeos Makefile does exactly this).
-- If `make` suddenly fails with "unrecognized option -m elf_i386", the host `ld` was used instead of `i686-elf-ld` (PATH shadowing or var clobbered).
+- If `make` fails with "unrecognized option -m elf_i386", the host `ld` was used instead of `i686-elf-ld` (PATH shadowing or var clobbered).

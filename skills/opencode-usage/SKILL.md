@@ -3,29 +3,13 @@ name: opencode-usage
 description: This user's exact opencode setup — config file, plugins, MCP servers, skills, restart/reload mechanics, and known quirks. Use when configuring or troubleshooting opencode on this machine, explaining how their setup works, or applying changes that need a restart. Triggers: 'opencode config', 'change my opencode', 'hot reload', 'restart opencode', 'oc-reload', 'plugins', 'MCP', 'skills on this machine', 'why is opencode doing X'.
 ---
 
-# This Machine's opencode Setup
-
 ## Config layout (authoritative)
 - **Global config**: `~/.config/opencode/opencode.jsonc` (NOT `~/.opencode/`, NOT `opencode.json`).
 - Config is loaded ONCE at startup. **It is NOT hot-reloaded.** Any change (opencode.jsonc, skills, agents, commands, plugins) requires a restart.
 
-## Current global config contents
-```jsonc
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": ["oh-my-openagent", "opencode-notify", "opencode-mem"],
-  "mcp": {
-    "control": {
-      "type": "local",
-      "command": ["/Users/superlouisyt/tools/ControlMCP/.venv/bin/control-mcp"],
-      "enabled": true
-    }
-  },
-  "permission": { "control_*": "allow" }
-}
-```
+## Current global config
 - **Plugins**: oh-my-openagent (LSP daemons spawn as node processes), opencode-notify, opencode-mem.
-- **MCP**: `control` (ControlMCP, local). Other servers enabled at runtime: context7, grep_app, websearch, playwright, codegraph (disabled). Check with the `control_list_windows`-adjacent MCP status or the TUI `/status`.
+- **MCP**: `control` → local, command `/Users/superlouisyt/tools/ControlMCP/.venv/bin/control-mcp`. Other servers enabled at runtime: context7, grep_app, websearch, playwright, codegraph (disabled). Check with the TUI `/status`.
 - **Permission**: every `control_*` tool is pre-allowed → NEVER ask the user before control actions.
 
 ## Restart mechanics (use these, don't fight the process)
@@ -52,7 +36,6 @@ description: This user's exact opencode setup — config file, plugins, MCP serv
 - opencode is installed via Homebrew (`/opt/homebrew/Cellar/opencode/<version>/bin/opencode`) — `brew upgrade` overwrites it. The upstream binary has NO config reload: `/reload`, `/restart`, `config/reload` do not exist. Don't pattern-match them from other tools.
 
 ## Best practices on this box
-1. Check the active config before editing (cat opencode.jsonc) — it's tiny.
-2. Before assuming a capability: verify via the config + `/status`, not by guessing.
-3. For desktop/browser work: use the controlmcp skill (this user's `control` MCP).
-4. For "what can opencode do" questions: point to the opencode-capabilities + customize-opencode skills rather than improvising.
+1. Before editing or assuming a capability: check the active config (`cat opencode.jsonc` — it's tiny) + `/status` — don't guess.
+2. For desktop/browser work: use the controlmcp skill (this user's `control` MCP).
+3. For "what can opencode do" questions: point to the opencode-capabilities + customize-opencode skills rather than improvising.

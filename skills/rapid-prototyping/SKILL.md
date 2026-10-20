@@ -3,9 +3,6 @@ name: rapid-prototyping
 description: Use when building a demo, PoC, or throwaway experiment fast — vertical slice first, hardcode then generalize, single file, fake data, and knowing when to discard vs productionize.
 ---
 
-## Goal
-Get a working demo in the fewest steps: prove the risky part FIRST, use fake data and hardcoded paths, and make the extend-vs-rewrite decision with evidence.
-
 ## Order of operations
 
 1. **The riskiest assumption is the first test.** fountain: "can jsqr decode a real QR from a camera frame?" — verify THAT before building any UI around it.
@@ -25,7 +22,6 @@ Get a working demo in the fewest steps: prove the risky part FIRST, use fake dat
 | Visual feedback | Console + alert() + raw DOM, in that order — styling is last |
 
 ## The evidence rule
-
 Every prototype milestone ends with something OBSERVABLE: a decoded payload printed, a pixel changed, a file written. If you can't see it work, it doesn't work.
 
 ## Productionize or throw away?
@@ -44,4 +40,4 @@ The prototype's job is to answer a question. Once answered, it's done — keepin
 - Polishing the prototype before the core works (styling a broken demo wastes the most time).
 - Generalizing too early — every unused abstraction is a tax on understanding.
 - Perfect commits mid-prototype — commit once at "it works", not every 15 minutes.
-- Forgetting the demo is throwaway: if you named things well and it's small, IN-PLACE extension is fine; a full rewrite for clarity is also legitimate — decide with the evidence, not guilt.
+- Forgetting the demo is throwaway: decide in-place extension vs full rewrite with the evidence, not guilt.

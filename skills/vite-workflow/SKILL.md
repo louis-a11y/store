@@ -3,9 +3,6 @@ name: vite-workflow
 description: Use when working with Vite in the fountain project — dev server, HTTPS with local certs, build/preview, config options, env vars, dependency quirks, plain-JS (no framework) setup.
 ---
 
-## Goal
-Work fluidly with the fountain Vite 6 setup (plain JS, no framework): dev, HTTPS dev, build, preview, config, env, and troubleshooting.
-
 ## The fountain scripts (from package.json)
 
 | Script | Command | Use |
@@ -19,7 +16,7 @@ Work fluidly with the fountain Vite 6 setup (plain JS, no framework): dev, HTTPS
 ## Secure context rule (why dev:https exists)
 
 - **getUserMedia (camera) only works on secure origins** — `https://` or `http://localhost`.
-- If testing on a LAN device (phone scanning from the PC's screen), you need HTTPS on the LAN address + cert trusting on the phone — the .certs/ dir exists for this. Add `server.host: true` in vite.config.js to expose on LAN.
+- Phone scanning from the PC's screen needs HTTPS on the LAN address + cert trust on the phone — that's what `.certs/` is for. Add `server.host: true` in vite.config.js to expose on LAN.
 
 ## vite.config.js quick reference (plain JS)
 
@@ -50,11 +47,11 @@ export default defineConfig({
 
 ## Common fountain pitfalls
 
-- **HTTPS + camera on phone**: both the cert AND the HTTPS origin must be trusted on the scanning device; on iOS the cert must be installed as a profile. Test on the phone with a camera first if this is a goal.
+- **HTTPS + camera on phone**: both cert AND HTTPS origin must be trusted on the scanning device; on iOS the cert must be installed as a profile. Test with a real phone camera first if this is a goal.
 - **jsqr only decodes from ImageData**: pass `ctx.getImageData(...)` from the capture canvas — NOT a video element. (See web-performance for downscaling.)
-- **Vite HMR**: plain-JS module changes hot-reload; changes to vite.config.js or .env restart the server automatically.
-- **Vite 6 note**: Node >= 18 required; check `node -v` if `vite` errors on startup. On macOS with Homebrew node, `npm run dev` picks it up.
-- **Port conflicts**: if 3000 is taken, run.sh may fail silently — use `lsof -i :3000` to find the squatter before assuming Vite broke.
+- **Vite HMR**: plain-JS module changes hot-reload; vite.config.js or .env changes restart the server automatically.
+- **Vite 6**: Node >= 18 required — check `node -v` if `vite` errors on startup.
+- **Port conflicts**: if 3000 is taken, run.sh may fail silently — `lsof -i :3000` before assuming Vite broke.
 
 ## Troubleshooting order
 
@@ -62,4 +59,4 @@ export default defineConfig({
 2. `node -v` ≥ 18?
 3. `lsof -i :3000` — port free?
 4. `npx vite --debug` — verbose startup logs.
-5. Cert expired/self-signed refused by browser? Recreate certs in .certs/ (see dotfiles/scripts if present) and re-trust.
+5. Cert expired/self-signed refused by browser? Recreate certs in .certs/ and re-trust.

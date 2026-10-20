@@ -3,9 +3,6 @@ name: session-handoff
 description: Use when ending, resuming, or transferring opencode sessions — /handoff summaries, what to record, resuming with oc/opencode -c, when to start fresh. Fits the user's workflow: opencode with SQLite session DB, multiple TUI windows.
 ---
 
-## Goal
-Never lose work across sessions: capture the right state in a handoff, resume smoothly, and know when a fresh session beats continuing one.
-
 ## The user's mechanics
 
 - `opencode -c` (alias `oc`) resumes the LAST session — the most recent one by `time_updated`.

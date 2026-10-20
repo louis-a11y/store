@@ -3,9 +3,6 @@ name: qemu-emulation
 description: Use when emulating or running the vibeos kernel / ISOs in QEMU on macOS — raw disk, GRUB ISO, Limine ISO, UEFI, networking. Grounded in the vibeos Makefile targets (run, run-grub, run-grub-uefi, run-limine, debug).
 ---
 
-## Goal
-Boot vibeos in QEMU quickly and correctly on macOS (Apple Silicon, brew qemu at /opt/homebrew), mirroring the exact commands in vibeos/Makefile.
-
 ## The canonical commands (from vibeos/Makefile)
 
 | Target | Command | What it boots |
@@ -36,14 +33,12 @@ Boot vibeos in QEMU quickly and correctly on macOS (Apple Silicon, brew qemu at 
 | Need | Add |
 |---|---|
 | Serial console | `-serial stdio` (then kernel writes to COM1 appear in terminal) |
-| Log/break on triple fault | `-d int,cpu_reset -no-reboot` (see last interrupt vector) |
-| Capture output | `-D /tmp/qemu.log` with `-d` |
+| Silent-reset / triple-fault log | `-d int,cpu_reset -no-reboot -D /tmp/qemu.log` — log's last entries show the faulting vector; most common: #GP (13) / #PF (14) / triple fault (vector 8 double-fault loop) |
 | More RAM/cores | `-m 512 -smp 2` |
 | Snapshot (don't persist disk) | `-snapshot` |
 
 ## Pitfalls
 
-- `-no-reboot -d int,cpu_reset -D /tmp/qemu.log`: if the VM silently resets, the log shows the faulting vector — most common: #GP (13) / #PF (14) / triple fault (vector 8 double-fault loop).
 - Mixing `-kernel` (multiboot raw kernel.bin) with the custom bootloader build does NOT work — the boot.bin path needs `-drive`, not `-kernel`.
 - If the screen stays black with `-vga std`, the kernel may be in VBE mode before the driver initializes — check serial output first.
 - Mouse grab: `Ctrl+Alt+G` releases the pointer; `Ctrl+Alt+1/2/3` switches monitor/serial/network views.

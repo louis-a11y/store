@@ -5,8 +5,6 @@ description: Reference guide for everything opencode can do. Use when the user a
 
 # OpenCode Capabilities
 
-Complete reference for opencode's feature surface. Use this to route work to the right feature instead of improvising.
-
 ## Interfaces
 
 | Interface | When to use |
@@ -46,10 +44,8 @@ Key options: `description` (required), `mode` (primary/subagent/all), `model`, `
 
 ## Skills
 
-- Skills = reusable instruction playbooks in `SKILL.md` format
-- Locations: project `.opencode/skills/`, global `~/.config/opencode/skills/`, external `~/.claude/skills/`, `~/.agents/skills/`
-- Frontmatter: `name` (required), `description` (effectively required, drives triggering)
-- Register custom paths via `skills.paths` in opencode.json
+- Reusable instruction playbooks in `SKILL.md` format; frontmatter `name` (required) + `description` (effectively required, drives triggering)
+- Locations: project `.opencode/skills/`, global `~/.config/opencode/skills/`, external `~/.claude/skills/`, `~/.agents/skills/` — register extra paths via `skills.paths` in opencode.json
 - Skill inventory: `opencode skill` family of commands
 
 ## Commands (Slash Commands)
@@ -99,14 +95,12 @@ Per-agent `permission` overrides top-level.
 
 ## Planned Workflows (Not Vibe-Coding)
 
-1. **Feature** → Tab to Plan mode → describe with examples/images → iterate → Tab back → build
-2. **Init** → `/init` creates AGENTS.md so opencode knows the project
-3. **Question** → `@file` mentions + Plan mode analysis
-4. **Big task** → decompose into parallel subagents (`general`/`deep`), review each
-5. **Mistake** → `/undo` / `/redo`
-6. **Share** → `/share` for conversation links
-7. **Handoff** → `/handoff` to continue work in a fresh session
-8. **Reuse** → skills + custom commands + custom agents fold repeatable workflows into the tool
+1. **Init** → `/init` creates AGENTS.md so opencode knows the project
+2. **Question** → `@file` mentions + Plan mode analysis
+3. **Big task** → decompose into parallel subagents (`general`/`deep`), review each
+4. **Mistake** → `/undo` / `/redo`
+5. **Share** → `/share` for conversation links
+6. **Handoff** → `/handoff` to continue work in a fresh session
 
 ## SDK & Extensibility
 
@@ -119,11 +113,8 @@ Per-agent `permission` overrides top-level.
 
 ## Model Management
 
-- Any provider: Anthropic, OpenAI, Google, opencode Zen, local models, etc.
-- `model` = `provider/model-id` format
-- Route models per agent (`agent.<name>.model`)
-- `opencode models` to list available models
-- Zen = curated, tested model list
+- Any provider: Anthropic, OpenAI, Google, opencode Zen, local models, etc.; `model` = `provider/model-id` format
+- Route models per agent (`agent.<name>.model`); `opencode models` lists available; Zen = curated, tested model list
 
 ## Diagnosing Problems
 

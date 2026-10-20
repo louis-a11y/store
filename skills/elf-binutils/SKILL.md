@@ -3,9 +3,6 @@ name: elf-binutils
 description: Use when inspecting binaries with GNU binutils — objdump, readelf, nm, objcopy, ld — for the vibeos kernel (ELF32) and bootloader (flat bin). Grounded in the vibeos build (nasm -f elf32, i686-elf-ld).
 ---
 
-## Goal
-Inspect and manipulate the vibeos build artifacts (entry.o, kernel.o, kernel.elf, kernel.bin, boot.bin, vbe_thunk.bin) to verify layout, find symbols, disassemble, and extract raw data.
-
 ## Which tool when
 
 | Tool | Job | Example |
@@ -46,12 +43,11 @@ head -20 vbe_thunk.h
 
 ## Why this matters for the build
 
-- `linker.ld` (bin) vs `linker_elf.ld` (ELF): the bin layout has no headers — `objdump` can't read kernel.bin, but `objdump -b binary -m i386 -D kernel.bin` CAN disassemble a flat binary.
+- `linker.ld` (bin) vs `linker_elf.ld` (ELF): bin layout has no headers — `objdump` can't read `kernel.bin`; disassemble with `objdump -b binary -m i386 -D kernel.bin` (flat binary has no load address — mentally add the link base).
 - `vbe_thunk.h` is generated from a binary via `xxd -i` — any change to vbe_thunk.asm requires rebuilding the header (`make` handles it via the vbe_thunk.h rule).
 
 ## Pitfalls
 
 - **i686 vs aarch64 tools**: readelf/objdump must match the target. Use `i686-elf-objdump`/`i686-elf-readelf` if plain GNU binutils refuses ("file format not recognized") — mac binutils sometimes lacks ELF32 i386.
 - `objdump -d` on ELF with no debug info still shows symbols for global functions (from symtab) — local statics may be missing without -g.
-- Flat binaries have no load address — you MUST disassemble with `-b binary -m i386` AND know the expected origin (use `-D` and mental add the link base).
 - Don't confuse `vbe_thunk.bin` (16-bit real-mode code, runs before pmode) with kernel code — disassemble with `-m i8086` if inspecting it.

@@ -3,9 +3,6 @@ name: macos-automation
 description: Use when automating the Mac from the shell — osascript/AppleScript, screencapture, pbcopy/pbpaste, launchctl, defaults, open, window management, notifications. Covers macOS-native CLI automation without third-party tools.
 ---
 
-## Goal
-Automate macOS (Apple Silicon, darwin) from the terminal: capture screens, control clipboard, talk to apps, manage launch agents, read/write defaults.
-
 ## Core commands
 
 | Command | Purpose |

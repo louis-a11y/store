@@ -2,36 +2,35 @@
   "skills": [
     {
       "name": "about-me",
-      "version": "f600208001",
+      "version": "b6a1d9e3d2",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "api-testing",
-      "version": "32c9b8758e",
+      "version": "b12ae64411",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "background-job",
-      "version": "56636ccb29",
+      "version": "39a4e54ee9",
       "files": [
-        ".DS_Store",
         "SKILL.md"
       ]
     },
     {
       "name": "browser-automation",
-      "version": "2b84f64da1",
+      "version": "c14f17d799",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "computer-control",
-      "version": "315b06e1f1",
+      "version": "8ab42d3ea4",
       "files": [
         "README.md",
         "SKILL.md",
@@ -42,70 +41,70 @@
     },
     {
       "name": "context-management",
-      "version": "ad95ea7492",
+      "version": "8361da6148",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "controlmcp",
-      "version": "a3d29ac4ff",
+      "version": "85882ce0e2",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "create-skill",
-      "version": "42d7bc82c0",
+      "version": "a0cf005bec",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "cross-compilation",
-      "version": "3e494c7dc0",
+      "version": "972df1380e",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "daily-routine",
-      "version": "cd589d80e0",
+      "version": "02c2db91f3",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "dev-workflow",
-      "version": "2d6cb3b7a5",
+      "version": "3ac20648b4",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "dotfiles-backup",
-      "version": "455bf003e1",
+      "version": "6d28f76092",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "elf-binutils",
-      "version": "9dd6a946bf",
+      "version": "28fec5f388",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "error-analysis",
-      "version": "44f982e6f7",
+      "version": "ae926ac157",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "homebrew-management",
-      "version": "8a29727d56",
+      "version": "874d963a65",
       "files": [
         "SKILL.md"
       ]
@@ -119,162 +118,161 @@
     },
     {
       "name": "kernel-debugging",
-      "version": "5a62b4cb9f",
+      "version": "ee01369030",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "knowledge-base",
-      "version": "2288ca2493",
+      "version": "5a10258904",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "macos-automation",
-      "version": "ea715ef726",
+      "version": "3e12ab0a35",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "makefile-mastery",
-      "version": "3dfbbbc3c8",
+      "version": "fe954f7a31",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "memory-notes",
-      "version": "93f26cc3fc",
+      "version": "7e4cffca26",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "opencode-capabilities",
-      "version": "4120bc2d33",
+      "version": "9c5ea99727",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "opencode-usage",
-      "version": "ac3a1dc6d0",
+      "version": "ba47b25b8b",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "orchestrator",
-      "version": "aea265b50d",
+      "version": "dea4781113",
       "files": [
-        ".DS_Store",
         "SKILL.md"
       ]
     },
     {
       "name": "product-domain",
-      "version": "de670f1893",
+      "version": "d9f2f81d60",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "project-workflow",
-      "version": "ad3d11e3a2",
+      "version": "373c8894d3",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "prompt-engineering",
-      "version": "0a511bf65e",
+      "version": "ecd61345d9",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "qemu-emulation",
-      "version": "48243bab47",
+      "version": "219d781a05",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "rapid-prototyping",
-      "version": "a05239befa",
+      "version": "9cc981a8a6",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "regex-crafting",
-      "version": "cd3dc255a0",
+      "version": "f6ff4c5ab3",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "session-handoff",
-      "version": "faaa4e9e7f",
+      "version": "6ecce3b3a8",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "shell-productivity",
-      "version": "c54c0bec20",
+      "version": "0216696d34",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "subagent-delegation",
-      "version": "3f1e418d98",
+      "version": "7131c2a13b",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "technical-domain",
-      "version": "d6571ab2dc",
+      "version": "b6f9463e39",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "terse-communication",
-      "version": "b1a48730da",
+      "version": "e62badb1d9",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "test-strategy",
-      "version": "59c5c67778",
+      "version": "e3786c6863",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "vite-workflow",
-      "version": "dbc308c15f",
+      "version": "f46f4c2fe2",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "web-performance",
-      "version": "c98bceafb3",
+      "version": "3ef2e07097",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "work-faster",
-      "version": "193e0d12b1",
+      "version": "1cc798af28",
       "files": [
         "SKILL.md"
       ]

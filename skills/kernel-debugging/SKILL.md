@@ -3,9 +3,6 @@ name: kernel-debugging
 description: Use when debugging the vibeos kernel or other bare-metal x86 code — GDB over QEMU, breakpoints on symbols, register/FB inspection, triple-fault reading, printk-style tracing.
 ---
 
-## Goal
-Debug a freestanding x86 kernel running in QEMU: attach GDB, set breakpoints on C symbols and asm labels, inspect registers/memory, and diagnose crashes (triple faults, page faults) without an OS in the guest.
-
 ## Debug session (vibeos Makefile)
 
 1. Terminal 1: `make debug` (runs `qemu-system-i386 ... -s -S`)
@@ -42,7 +39,7 @@ Debug a freestanding x86 kernel running in QEMU: attach GDB, set breakpoints on 
 
 ## Crash diagnosis without GDB
 
-- **Triple fault / reset loop**: run `qemu-system-i386 ... -d int,cpu_reset -no-reboot -D /tmp/qemu.log`. The log's last entries show the fault vector (e.g. `check_exception old=0x0e new 0x08` = page fault escalating to double fault → triple).
+- **Triple fault / reset loop**: run `qemu-system-i386 ... -d int,cpu_reset -no-reboot -D /tmp/qemu.log`. The log's last entries show the faulting vector (e.g. `check_exception old=0x0e new 0x08` = page fault escalating to double fault → triple).
 - **#PF (14)**: check CR2 (`p $cr2`) = faulting address; it's usually a bad pointer, wrong segment base, or unmapped page.
 - **#GP (13)**: bad segment selector, non-canonical address, or privileged instruction in ring 0 misuse (e.g. `cli` before interrupts set up).
 - **printk-style tracing**: simplest fix — write to VGA 0xB8000 (text mode) or toggle a pixel in VBE FB, plus `-serial stdio` and write to COM1 (port 0x3F8). Serial survives panics that kill the screen.

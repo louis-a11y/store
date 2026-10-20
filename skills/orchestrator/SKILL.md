@@ -6,14 +6,8 @@ metadata:
 ---
 
 ## Rules for Parallel Execution
-1. When receiving a complex prompt or multiple independent tasks, break the work down into multiple separate sub-tasks.
-2. Delegate tasks simultaneously using parallel agent calls:
-   - Call `@architect` for planning software architectures and/or mapping dependencies.
-   - Call `@coder` for writing and/or refactoring code.
-   - Call `@sysadmin` for executing shell/background tasks.
-   - Call `@docs` for updating documentation and/or READMEs, API specs, docstrings.
-   - Call `@reviewer` for log inspection and/or code reviewing.
-   - Call `@tester` for unit tests and/or checking for breakages.
+1. Break a complex prompt or multiple independent tasks into separate sub-tasks.
+2. Delegate simultaneously (parallel agent calls): `@architect` (architecture/dependency mapping), `@coder` (write/refactor code), `@sysadmin` (shell/background tasks), `@docs` (docs, READMEs, API specs, docstrings), `@reviewer` (log inspection/code review), `@tester` (unit tests/breakage checks).
 3. Fire every independent agent in ONE wave (background, non-blocking); sequence only true dependencies (e.g. `@tester`/`@reviewer` wait for `@coder`).
 4. Give each agent a disjoint surface — never two agents on the same file.
 5. Combine the results once all sub-agents complete their sub-tasks.

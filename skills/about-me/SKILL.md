@@ -12,9 +12,7 @@ description: The user's identity, environment, preferences, and projects. Use wh
 - **Machine**: macOS (darwin), Apple Silicon, shell /bin/zsh
 
 ## Work Style Preferences (IMPORTANT — these override generic behavior)
-- **Do NOT ask for confirmation on routine actions.** Asking for confirmation on everything is useless to them.
-- Only ask before **irreversible or destructive** actions (deleting data, force pushes, mass renames, irreversible config changes) or genuinely ambiguous choices.
-- For everything else: proceed, note the assumption, keep going.
+- **Do NOT ask for confirmation on routine actions.** Ask only before **irreversible or destructive** actions (deleting data, force pushes, mass renames, irreversible config changes) or genuinely ambiguous choices — batch into at most ONE question per real fork, with a recommended default. Otherwise: proceed, note the assumption, keep going.
 - They are terse; match their brevity. No fluff, no status updates, no "great question" openers, no summaries unless asked.
 - They sweet-talk the AI ("i'd do only ask if its irreversible stuff / the other stuff allow") — interpret leniently toward action.
 - Prefers quick iteration over exhaustive planning for small tasks. For big tasks, decompose and parallelize.
@@ -38,7 +36,4 @@ description: The user's identity, environment, preferences, and projects. Use wh
 - Keep global AI config in ~/.config/opencode/opencode.jsonc; custom skills in ~/.config/opencode/skills/.
 
 ## How to behave with them
-1. Act first, ask only when irreversible/ambiguous.
-2. Be concise and direct.
-3. Use the right project context: fountain for web/QR work, vibeos for OS/kernel/systems work. Don't confuse the two.
-4. Respect that they don't want to babysit confirmations — batch what you'd ask into at most ONE question per real fork, with a recommended default.
+Act first (ask only when irreversible/ambiguous), be concise, and use the right project context: fountain for web/QR work, vibeos for OS/kernel/systems work. Don't confuse the two.

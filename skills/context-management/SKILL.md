@@ -3,17 +3,9 @@ name: context-management
 description: Use when an opencode session feels heavy or slow — context bloat, long tool outputs, repeated reads — to keep the window lean and the agent sharp. Includes targeted-reading, delegation, and pruning tactics that match the user's setup.
 ---
 
-## Goal
-Keep the context window lean so the agent reasons well: avoid bloat at the source, read only what's needed, delegate bulk, and prune before continuing.
+## What bloats context (worst first)
 
-## What bloats context (in order of damage)
-
-1. Full-file reads of big files (grep/read targeted ranges instead)
-2. Long command outputs (logs, ls -la of huge dirs, npm install walls)
-3. Repeated greps for the same thing (search once, or delegate to explore)
-4. Re-reading files already in context (leverage subagent continuations instead)
-5. Giant frontmatter/skill dumps injected into unrelated tasks
-6. Pasting entire error logs instead of the tail + summary
+Full-file reads > long command outputs > repeated greps > re-reading files already in context > giant frontmatter/skill dumps on unrelated tasks > pasting whole error logs — each fixed in Tactics below.
 
 ## Tactics
 
@@ -30,7 +22,7 @@ Keep the context window lean so the agent reasons well: avoid bloat at the sourc
 ## The read-then-forget rule
 
 - Read with a purpose: "I need these 3 facts from this file" — extract, use, don't paste back.
-- Prefer `grep` for locating, `read offset` for the slice, `lsp_find_references` for symbol graph — each cheaper than a full read.
+- `lsp_find_references` for symbol graphs — cheaper than a full read (grep/offset covered in Tactics).
 - Delegation is context-management: explore/librarian agents (background) return SUMMARIES, not full dumps.
 
 ## Quantified guardrails

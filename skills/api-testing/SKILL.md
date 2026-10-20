@@ -3,9 +3,6 @@ name: api-testing
 description: Use when testing HTTP endpoints or APIs from the terminal — curl recipes, JSON with jq, status codes, headers, cookies, file uploads, quick smoke tests for local dev servers like fountain.
 ---
 
-## Goal
-Test HTTP APIs fast and readably from the shell: proper curl flags, JSON parsing with jq, headers/cookies, and smoke-testing a local server without a framework.
-
 ## curl quick reference
 
 | Task | Command |
@@ -29,7 +26,7 @@ curl -sS URL | jq '.items[0].name'          # field
 curl -sS URL | jq 'length'                  # array length
 curl -sS URL | jq 'map(.id)'                # transform
 curl -sS URL | jq -r '.token'               # raw string (no quotes) → shell var
-curl -sS -x POST -d '{"q":"x"}' URL | jq '.results | length'
+curl -sS -X POST -H 'Content-Type: application/json' -d '{"q":"x"}' URL | jq '.results | length'
 ```
 
 ## Smoke-test pattern (works for fountain)

@@ -3,9 +3,6 @@ name: dotfiles-backup
 description: Use when backing up, versioning, or restoring dotfiles — ~/.zshrc, ~/.config/opencode/, ~/bin/ — to git, restoring on a new machine, symlink strategy.
 ---
 
-## Goal
-Keep the user's machine config (shell, opencode, scripts, skills) versioned in git so a new machine can be configured in minutes — and keep ~/bin + skills synced.
-
 ## What matters on this machine
 
 | Path | Why |
@@ -54,8 +51,7 @@ ln -s ~/dotfiles/bin ~/bin
 
 ## Skill sync
 
-- Skills live in `~/.config/opencode/skills/` — they're plain folders with SKILL.md; they version in git like everything else.
-- New skills are picked up on opencode restart (`/exit` + `oc` in the same terminal).
+- Skills live in `~/.config/opencode/skills/` — plain folders with SKILL.md; they version in git like everything else. New skills are picked up on opencode restart (`/exit` + `oc` in the same terminal).
 
 ## Pitfalls
 

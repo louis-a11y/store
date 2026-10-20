@@ -3,9 +3,6 @@ name: subagent-delegation
 description: Use when orchestrating parallel subagents in opencode — when to delegate, writing self-contained prompts, avoiding duplicate work, collecting results, resuming failed agents. The user's setup: explore/librarian/oracle/plan agents + category agents (Sisyphus-Junior).
 ---
 
-## Goal
-Get maximum throughput from subagents: decompose work into parallel units, write delegation prompts that don't need follow-ups, and collect verified results.
-
 ## When to delegate vs do it yourself
 
 | Situation | Move |
@@ -45,8 +42,7 @@ Get maximum throughput from subagents: decompose work into parallel units, write
 ## Resuming failed agents (continuations)
 
 - Every task returns a continuation session id (`ses_...`). Store it.
-- Failed/incomplete → `task(task_id="ses_...", prompt="Fix: {specific error}")` — the agent keeps FULL context, no re-exploration.
-- Verification failed → same pattern: "Failed verification: {error}. Fix."
+- Failed/incomplete → `task(task_id="ses_...", prompt="Fix: {specific error}")`; verification failed → same with "Failed verification: {error}. Fix." Either way the agent keeps FULL context, no re-exploration.
 - NEVER start fresh for a follow-up — it re-reads everything and loses what the agent already learned.
 
 ## Pitfalls

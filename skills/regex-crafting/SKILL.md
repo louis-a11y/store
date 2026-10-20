@@ -3,9 +3,6 @@ name: regex-crafting
 description: Use when writing or debugging regular expressions — greedy/lazy, anchors, character classes, lookarounds, multiline/dotall traps, JS vs PCRE vs POSIX differences, and when regex is the wrong tool.
 ---
 
-## Goal
-Write correct regexes fast and debug them without guessing: build from anchors, avoid the classic traps, and know when to reach for a parser instead.
-
 ## Build order (never write the whole thing at once)
 
 1. **Anchors first**: `^`/`$` or `\b` — define where the match lives.
