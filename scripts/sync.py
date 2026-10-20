@@ -107,9 +107,9 @@ def main() -> int:
 
         if lh is not None and lh == sh:                 # both sides identical
             state[name] = lh
-        elif lh is not None and sh is None:             # store copy gone: restore from live
+        elif lh is not None and sh is None:             # store copy gone: restore (or brand-new local)
             copy_to(live[name], DEST / name)
-            actions.append(f"+{name} (restored to store)")
+            actions.append(f"+{name} ({'new' if last is None else 'restored to store'})")
             state[name] = lh
         elif sh is not None and lh is None:             # live copy gone: restore from store
             copy_to(store[name], SRC / name)
