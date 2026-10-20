@@ -252,13 +252,6 @@
       ]
     },
     {
-      "name": "test-remote",
-      "version": "d02344d701",
-      "files": [
-        "SKILL.md"
-      ]
-    },
-    {
       "name": "test-strategy",
       "version": "59c5c67778",
       "files": [
