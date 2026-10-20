@@ -55,16 +55,18 @@ trap 'rm -rf "$TMP"' EXIT
 
 # one archive download covers every skill, including multi-file ones
 curl -fsSL "https://codeload.github.com/$REPO/tar.gz/refs/heads/$BRANCH" -o "$TMP/pack.tgz"
+PREFIX="$(tar -tzf "$TMP/pack.tgz" | head -1 | cut -d/ -f1)"
+tar -tzf "$TMP/pack.tgz" > "$TMP/manifest"
 
 mkdir -p "$DEST"
 INSTALLED=0
 for name in "${NAMES[@]}"; do
-  if ! tar -tzf "$TMP/pack.tgz" | grep -q "^$REPO-$BRANCH/skills/$name/"; then
+  if ! grep -q "^$PREFIX/skills/$name/" "$TMP/manifest"; then
     echo "  ! $name: not in store, skipping" >&2
     continue
   fi
   rm -rf "$DEST/$name"
-  tar -xzf "$TMP/pack.tgz" -C "$DEST" --strip-components=2 "$REPO-$BRANCH/skills/$name"
+  tar -xzf "$TMP/pack.tgz" -C "$DEST" --strip-components=2 "$PREFIX/skills/$name"
   INSTALLED=$((INSTALLED + 1))
 done
 
