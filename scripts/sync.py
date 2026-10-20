@@ -61,13 +61,14 @@ def copy_to(src: Path, dest: Path) -> None:
 def main() -> int:
     # 1. catch up with GitHub first (skill edits from other devices land here)
     if run("git", "status", "--porcelain"):
-        print("! store repo has manual edits — skipping pull this run")
-    else:
-        try:
-            run("git", "pull", "--ff-only", "origin", BRANCH)
-        except subprocess.CalledProcessError as e:
-            print(f"! git pull failed, aborting run: {e}")
-            return 1
+        run("git", "add", "-A")
+        run("git", "commit", "-m", "sync: manual changes")
+    try:
+        run("git", "pull", "--rebase", "origin", BRANCH)
+    except subprocess.CalledProcessError:
+        run("git", "rebase", "--abort")
+        print("! remote and local histories conflicted — aborting this run, nothing touched")
+        return 1
 
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     live = skill_dirs(SRC)
@@ -127,7 +128,11 @@ def main() -> int:
     run("git", "add", "-A")
     summary = ", ".join(actions) if actions else "state refresh"
     run("git", "commit", "-m", f"sync: {summary}")
-    run("git", "push", "origin", BRANCH)
+    try:
+        run("git", "push", "origin", BRANCH)
+    except subprocess.CalledProcessError:
+        print("! push failed (did another device push in the meantime?) — will retry next run")
+        return 1
     print(f"published: {summary}")
     return 0
 
