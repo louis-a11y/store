@@ -278,6 +278,13 @@
       "files": [
         "SKILL.md"
       ]
+    },
+    {
+      "name": "zz-test-restore",
+      "version": "0f63316a91",
+      "files": [
+        "SKILL.md"
+      ]
     }
   ]
 }
