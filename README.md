@@ -135,17 +135,21 @@ Target any agent's directory — `~/.config/opencode/skills`, `~/.claude/skills`
 
 ## Sync
 
-Two-way **mirror** (launchd job `com.louis-a11y.skillstore-sync`: hourly + at login, log at `/tmp/skillstore-sync.log`). Manual run: `python3 scripts/sync.py`.
+Two-way **recovery** sync (launchd job `com.louis-a11y.skillstore-sync`: hourly + at login, log at `/tmp/skillstore-sync.log`). Manual run: `python3 scripts/sync.py`.
 
-| You do this | What happens everywhere else |
+| You do this | What happens |
 |---|---|
 | Edit a skill here | other devices + the store get it |
 | Edit on another device | downloaded here on the next run |
-| Delete here | deleted from the store, then from other devices |
-| Delete on another device | deleted here |
+| **Accidentally delete** anything, anywhere | it comes back from whichever side still has it |
 | Same skill edited on both sides | local copy wins, warning logged, nothing overwritten |
 
-It never deletes a skill it hasn't synced before (a fresh machine can't wipe anything), and a skill deleted everywhere can be re-added later by just creating it again.
+**Permanent deletion has exactly one path** — the trash:
+
+```bash
+bash scripts/trash.sh SKILL-NAME        # gone from this machine, the store, everywhere
+git mv trash/SKILL-NAME skills/SKILL-NAME   # undo: comes back everywhere
+```
 
 ## Install on another Mac
 
