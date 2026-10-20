@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
-"""Two-way sync between the live skills folder and the store repo.
+"""Two-way mirror sync between the live skills folder and the store repo.
 
 Live folder: ~/.config/opencode/skills   (the skills agents actually load)
 Store:       ~/tools/skillstore          (published to github.com/louis-a11y/store)
 
-Every run:
-1. pull the store from GitHub — edits made on your other device arrive here
-2. compare each skill in both directions, using .sync-state.json to know
-   what was in sync last time:
-   - changed locally         -> copy into the store and push
-   - changed on GitHub       -> copy into the live folder
-   - changed on BOTH sides   -> CONFLICT: keep local, warn, push nothing
-   - deleted locally         -> stays deleted (never resurrected)
-   - new on GitHub           -> downloaded into the live folder
-3. rebuild skills/index.json, commit + push only if the store changed
+Rules (local copy always wins a conflict):
+- edited here            -> copied into the store, pushed
+- edited on GitHub       -> downloaded here
+- deleted here           -> deleted from the store (and from other devices later)
+- deleted on GitHub      -> deleted here
+- edited on both sides   -> kept local, warning logged, nothing pushed
+- never synced before    -> treated as new, propagated (a fresh machine can never
+                            trigger deletions)
+
+.sync-state.json holds the last hash both sides agreed on, plus "deleted"
+tombstones that stop deletions from being resurrected on devices that have not
+synced yet. Runs hourly + at login via launchd (com.louis-a11y.skillstore-sync).
 """
 import hashlib
 import json
@@ -42,7 +44,7 @@ def hash_tree(d: Path) -> str:
     return h.hexdigest()
 
 
-def skill_dirs(root: Path) -> dict[str, Path]:
+def skill_dirs(root: Path) -> dict:
     return {
         d.name: d
         for d in root.iterdir()
@@ -59,7 +61,7 @@ def copy_to(src: Path, dest: Path) -> None:
 
 
 def main() -> int:
-    # 1. catch up with GitHub first (skill edits from other devices land here)
+    # 1. catch up with GitHub first (other devices' changes arrive here)
     if run("git", "status", "--porcelain"):
         run("git", "add", "-A")
         run("git", "commit", "-m", "sync: manual changes")
@@ -73,56 +75,64 @@ def main() -> int:
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     live = skill_dirs(SRC)
     store = skill_dirs(DEST)
-    actions: list[str] = []
+    actions = []
 
     for name in sorted(set(live) | set(store)):
         last = state.get(name)
         lh = hash_tree(live[name]) if name in live else None
         sh = hash_tree(store[name]) if name in store else None
 
-        if lh is not None and lh == sh:                     # both sides identical
+        if lh is not None and lh == sh:                      # both sides identical
             state[name] = lh
-        elif lh is not None and sh is None:                 # only here: new local skill
-            copy_to(live[name], DEST / name)
-            actions.append(f"+{name} (new local)")
-            state[name] = lh
-        elif sh is not None and lh is None:                 # only in store
-            if last == "deleted":
-                pass                                        # you deleted it on purpose; leave it gone
-            elif last is None:
-                copy_to(store[name], SRC / name)            # genuinely new from another device
+        elif lh is not None and sh is None:                  # only on this machine
+            if last == "deleted":                            # re-added after a deletion
+                copy_to(live[name], DEST / name)
+                actions.append(f"+{name} (re-added)")
+                state[name] = lh
+            elif last is None:                               # brand-new local skill
+                copy_to(live[name], DEST / name)
+                actions.append(f"+{name} (new)")
+                state[name] = lh
+            elif live[name].is_symlink():                    # deleted on GitHub; local is a symlink
+                print(f"! {name}: deleted from store but local is a symlink -> {live[name].resolve()}; "
+                      f"remove manually if that was intended")
+                state[name] = "deleted"
+            else:                                            # deleted on another device
+                shutil.rmtree(live[name])
+                actions.append(f"-{name} (deleted on store side)")
+                state[name] = "deleted"
+        elif sh is not None and lh is None:                  # only in the store
+            if last == "deleted":                            # re-added on another device
+                copy_to(store[name], SRC / name)
+                actions.append(f"-{name} (re-added, downloaded)")
+                state[name] = sh
+            elif last is None:                               # new from another device
+                copy_to(store[name], SRC / name)
                 actions.append(f"-{name} (downloaded)")
                 state[name] = sh
-            elif last != sh:
-                print(f"! {name}: deleted locally but changed on GitHub — left deleted; check it wasn't an accident")
-            else:
-                state[name] = "deleted"                     # was in sync, then you deleted it here
-        else:                                               # both exist, differ
-            local_changed = lh != last
-            remote_changed = sh != last
-            if local_changed and remote_changed:
+            else:                                            # deleted on this machine
+                shutil.rmtree(store[name])
+                actions.append(f"-{name} (deleted here)")
+                state[name] = "deleted"
+        else:                                                # both exist, differ
+            if lh != last and sh != last:                    # changed on both sides
                 print(f"! CONFLICT {name}: changed both locally and on GitHub — kept local, NOT pushed. "
                       f"Reconcile the two versions, then run again")
                 state[name] = lh
-            elif local_changed:
+            elif lh != last:                                 # edited here
                 copy_to(live[name], DEST / name)
                 actions.append(f"+{name} (edited here)")
                 state[name] = lh
-            else:                                           # only remote changed
-                if live[name].is_symlink():
-                    print(f"! {name}: changed on GitHub but local is a symlink -> {live[name].resolve()}. "
-                          f"Edit it at its target instead")
-                    state[name] = lh
-                else:
-                    copy_to(store[name], SRC / name)
-                    actions.append(f"-{name} (updated from store)")
-                    state[name] = sh
+            elif live[name].is_symlink():                    # changed on GitHub; symlinked locally
+                print(f"! {name}: changed on GitHub but local is a symlink -> {live[name].resolve()}; "
+                      f"edit it at its target instead")
+                state[name] = lh
+            else:                                            # changed on GitHub
+                copy_to(store[name], SRC / name)
+                actions.append(f"-{name} (updated from store)")
+                state[name] = sh
 
-    # prune state entries for skills gone from both sides (nothing left to protect)
-    for stale in [n for n in state if n not in live and n not in store]:
-        del state[stale]
-
-    # 3. rebuild catalog, publish only if something changed
+    # 2. rebuild catalog, publish only if something changed
     run(sys.executable, str(REPO / "scripts/build-index.py"))
     STATE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
 

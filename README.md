@@ -135,7 +135,27 @@ Target any agent's directory — `~/.config/opencode/skills`, `~/.claude/skills`
 
 ## Sync
 
-The store **two-way syncs** daily (launchd job `com.louis-a11y.skillstore-sync`, hourly + at login, log at `/tmp/skillstore-sync.log`). Manual sync: `python3 scripts/sync.py`. Each run pulls from GitHub first, so skills added or edited on another device land in the live skills folder here on the next run. Edits made here get pushed back. If a skill changed on both sides, the local copy wins and a warning is logged — nothing is overwritten silently. Local deletions are never resurrected.
+Two-way **mirror** (launchd job `com.louis-a11y.skillstore-sync`: hourly + at login, log at `/tmp/skillstore-sync.log`). Manual run: `python3 scripts/sync.py`.
+
+| You do this | What happens everywhere else |
+|---|---|
+| Edit a skill here | other devices + the store get it |
+| Edit on another device | downloaded here on the next run |
+| Delete here | deleted from the store, then from other devices |
+| Delete on another device | deleted here |
+| Same skill edited on both sides | local copy wins, warning logged, nothing overwritten |
+
+It never deletes a skill it hasn't synced before (a fresh machine can't wipe anything), and a skill deleted everywhere can be re-added later by just creating it again.
+
+## Install on another Mac
+
+```bash
+brew install gh && gh auth login
+git clone https://github.com/louis-a11y/store.git ~/tools/skillstore
+bash ~/tools/skillstore/scripts/setup-machine.sh
+```
+
+The script is idempotent — re-running it just refreshes the job. First sync establishes that machine's state; after that both directions flow every hour.
 
 ## License
 
