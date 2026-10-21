@@ -1,6 +1,6 @@
 ---
 name: browser-automation
-description: Use when driving a real browser for verification/testing of the fountain app — Playwright page steps, screenshots, console-error capture, two-tab QR flow, mobile emulation for the scan side.
+description: Use when driving a real browser for verification/testing — Playwright page steps, screenshots, console-error capture, mobile/desktop emulation, network interception. Works for any web app (fountain, generic sites, SPAs).
 ---
 
 ## Playwright quick reference (fountain is on localhost:3000)

@@ -1,6 +1,6 @@
 ---
 name: elf-binutils
-description: Use when inspecting binaries with GNU binutils — objdump, readelf, nm, objcopy, ld — for the vibeos kernel (ELF32) and bootloader (flat bin). Grounded in the vibeos build (nasm -f elf32, i686-elf-ld).
+description: Use when inspecting ELF/i686 binaries with GNU binutils — objdump, readelf, nm, objcopy, ld — for bare-metal x86 (ELF32, i686-elf), bootloaders (flat bin), and cross-compiled systems (vibeos, embedded, custom OS). General i686-elf / objdump / readelf / nm / objcopy / size / xxd workflows, plus vibeos-specific notes preserved below.
 ---
 
 ## Which tool when

@@ -1,6 +1,6 @@
 ---
 name: web-performance
-description: Use when making the fountain web app faster or auditing performance — bundle size, jsQR scanning performance, rendering, Lighthouse, profiling techniques for plain-JS Vite apps.
+description: Use when making any web app faster or auditing performance — bundle size, jsQR scanning performance, rendering, Lighthouse, profiling techniques for plain-JS Vite apps.
 ---
 
 ## Measure first: Lighthouse
@@ -19,14 +19,14 @@ npx vite build && ls -lh dist/assets/*.js    # raw sizes
 # visualize: rollup-plugin-visualizer (devDep): plugins: [visualizer({ open: true })]
 ```
 
-## fountain-specific hot spots
+## Performance hot spots (app-agnostic examples)
 
 1. **jsQR is CPU-heavy** — scans every video frame synchronously:
    - Throttle: scan at most every 2-3 frames (`frameCount % 3 === 0`).
    - Downscale the frame BEFORE jsQR (256px wide is plenty — jsQR returns data only).
    - Move scanning off the main thread → Web Worker (`new Worker('scanner.js')`, postMessage frames, receive decoded payload). THE fix if the UI janks while scanning.
 2. **Canvas readback**: `getImageData` forces a GPU→CPU sync stall. Read only the scanned region, not the whole frame.
-3. **QR generation (qrcode lib)**: QR per keystroke re-renders — debounce input; reuse the same canvas, redraw only when payload changes.
+3. **Code-generation (QR, barcode)**: QR per keystroke re-renders — debounce input; reuse the same canvas, redraw only when payload changes.
 4. **rAF vs setInterval**: drive the camera loop with requestAnimationFrame — backpressure + battery safe.
 
 ## Rendering basics (plain JS)

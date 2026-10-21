@@ -1,8 +1,9 @@
 {
   "about-me": "b6a1d9e3d2fe0f6b8b8855189e351bbe67adda61",
   "api-testing": "b12ae644118f6a57cf27372f6219e3e8a0086e9d",
+  "attachment-reading": "920e575c2903562bd4a97be67946e0bd84a1f2dd",
   "background-job": "39a4e54ee9c561ea1168c11c285c64f77ecf86c6",
-  "browser-automation": "c14f17d799782f0dbfea7e729319ea2e000bb32c",
+  "browser-automation": "568c3f40bfc33d4e1643e3274b0673dfd64517c8",
   "computer-control": "a42e0ec3550f6dc82e0d156ec4c596f7da5a3960",
   "context-management": "8361da614875dbf0404794d65019961a3b17d3ad",
   "controlmcp": "4eb6a081a917a1a9d9cebf45b92377f6a50826ba",
@@ -11,10 +12,9 @@
   "daily-routine": "02c2db91f3b06c760dd5e5b01c237cff3a8a2daf",
   "dev-workflow": "3ac20648b496ac1bc8b77ad8782054c91d951600",
   "dotfiles-backup": "6d28f76092eab615e8000ae904289c5595316c93",
-  "elf-binutils": "28fec5f3880b2ed3632a7bf1d7197a4ede208ae8",
+  "elf-binutils": "0bc7b8a715fb617c7bdd5d76fecfa2af738b33e3",
   "error-analysis": "ae926ac1576c006a251ebca246602caf93516508",
   "homebrew-management": "874d963a65a936fc4c7596e2d5677c13774059e9",
-  "image-reading": "237d19ebd1c196b86a1e6144aeb9edabb47248e9",
   "kernel-debugging": "ee0136903089ad17a8a80d7697b5d0de1b230b00",
   "knowledge-base": "5a1025890415df8a56175d7a99e82d4e87063b60",
   "macos-automation": "3e12ab0a3574916efe0bce21f311c232961ed856",
@@ -33,9 +33,9 @@
   "shell-productivity": "0216696d345f79f70e4d3e2fa336a8000b15780c",
   "subagent-delegation": "7131c2a13bf7d5c2d70d5bb9bfd338eba3412062",
   "technical-domain": "b6f9463e39c6cf2d0bce0af0981a18a590929b14",
-  "terse-communication": "e62badb1d9c754b94e0a709db952759fa3ccdd8e",
+  "terse-communication": "bf17a0d08913b2d8afcacf600bc6f0b6dfef2eca",
   "test-strategy": "e3786c6863248fdcb7b96f12ddf91f53e5b6ffae",
   "vite-workflow": "f46f4c2fe24a6b523f9a951832697a2276c86128",
-  "web-performance": "3ef2e07097ada65866231ddc6322b71629fad60b",
-  "work-faster": "1cc798af28843add731f06a1f21731c0b6ce22e9"
+  "web-performance": "90008b567199b2ef4e9171fe09a0a9b355721550",
+  "work-faster": "084f3941a59cf6d2a921797f2c182e7239fa2bf3"
 }

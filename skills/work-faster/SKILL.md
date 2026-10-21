@@ -1,6 +1,6 @@
 ---
 name: work-faster
-description: Use when you want to work faster and more efficiently. Provides techniques for parallel execution, context optimization, and task decomposition. Always triggers
+description: Use when you want to work faster and more efficiently. Provides techniques for parallel execution, context optimization, and task decomposition. Triggers: when you want faster results.
 ---
 
 # Work Faster

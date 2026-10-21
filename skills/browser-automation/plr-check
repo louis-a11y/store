@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+# Universal Playwright launcher — any URL, not fountain-only.
+# Usage: plr-check <url> [output_dir=/tmp/plr-$(date +%H%M)]
+# Captures: screenshot + console errors + page title + HTTP status.
+# Requires: node, playwright (npm i -g playwright) + browsers installed.
+
+url=${1:-https://localhost:3000}
+out=${2:-/tmp/plr-$(date +%H%M)}
+mkdir -p "$out"
+
+node <<'NODE'
+const { chromium } = require('playwright');
+const url = process.env.PL_URL || 'https://localhost:3000';
+const out = process.env.PL_OUT || '/tmp/plr';
+(async () => {
+  const browser = await chromium.launch({ headless: true, ignoreHTTPSerrors: true });
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 } });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+  page.on('pageerror', e => errors.push(String(e)));
+  const res = await page.goto(url, { waitUntil: 'load', timeout: 15000 }).catch(e => ({ status: () => 0, url: () => url }));
+  const title = await page.title().catch(() => 'n/a');
+  await page.screenshot({ path: out + '/shot.png', fullPage: false });
+  require('fs').writeFileSync(out + '/meta.json', JSON.stringify({ url, status: res.status(), title, errors, ts: new Date().toISOString() }, null, 2));
+  console.log('OK', url, 'status=', res.status(), 'errors=', errors.length, '->', out);
+  await browser.close();
+})();
+NODE

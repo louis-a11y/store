@@ -1,6 +1,6 @@
 ---
 name: terse-communication
-description: Use when writing ANY reply, message, or doc for this user — terse, direct, no fluff, no status-update openers, tables over prose, no filler adjectives. THE default style for this machine.
+description: Use when writing ANY reply, message, or doc for this user — terse, direct, no fluff, no status-update openers, tables over prose, no filler adjectives. Use terse direct tone.
 ---
 
 ## The rules (apply to every reply)

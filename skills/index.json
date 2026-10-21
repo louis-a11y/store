@@ -15,6 +15,13 @@
       ]
     },
     {
+      "name": "attachment-reading",
+      "version": "920e575c29",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "background-job",
       "version": "39a4e54ee9",
       "files": [
@@ -23,9 +30,10 @@
     },
     {
       "name": "browser-automation",
-      "version": "c14f17d799",
+      "version": "568c3f40bf",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "plr-check"
       ]
     },
     {
@@ -86,7 +94,7 @@
     },
     {
       "name": "elf-binutils",
-      "version": "28fec5f388",
+      "version": "0bc7b8a715",
       "files": [
         "SKILL.md"
       ]
@@ -101,13 +109,6 @@
     {
       "name": "homebrew-management",
       "version": "874d963a65",
-      "files": [
-        "SKILL.md"
-      ]
-    },
-    {
-      "name": "image-reading",
-      "version": "237d19ebd1",
       "files": [
         "SKILL.md"
       ]
@@ -240,7 +241,7 @@
     },
     {
       "name": "terse-communication",
-      "version": "e62badb1d9",
+      "version": "bf17a0d089",
       "files": [
         "SKILL.md"
       ]
@@ -261,14 +262,14 @@
     },
     {
       "name": "web-performance",
-      "version": "3ef2e07097",
+      "version": "90008b5671",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "work-faster",
-      "version": "1cc798af28",
+      "version": "084f3941a5",
       "files": [
         "SKILL.md"
       ]
