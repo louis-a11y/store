@@ -8,7 +8,7 @@ description: This user's exact opencode setup — config file, plugins, MCP serv
 - Config is loaded ONCE at startup. **It is NOT hot-reloaded.** Any change (opencode.jsonc, skills, agents, commands, plugins) requires a restart.
 
 ## Current global config
-- **Plugins**: oh-my-openagent (LSP daemons spawn as node processes), opencode-notify, opencode-mem.
+- **Plugins**: oh-my-openagent (LSP daemons spawn as node processes), opencode-mem.
 - **MCP**: `control` → local, command `/Users/superlouisyt/tools/ControlMCP/.venv/bin/control-mcp`. Other servers enabled at runtime: context7, grep_app, websearch, playwright, codegraph (disabled). Check with the TUI `/status`.
 - **Permission**: every `control_*` tool is pre-allowed → NEVER ask the user before control actions.
 
