@@ -1,6 +1,6 @@
 ---
 name: superlouisyt
-language: English (primary for this agent), Italian (native), French (learning) — translate any Chinese
+language: Italian (native), English (fluent), French (learning) — translate any Chinese — translate any Chinese
 timezone: Europe/Rome (en-US locale)
 machine: macOS (Apple Silicon), /bin/zsh
 work-style: terse / confirm-destructive-only / batch-one-question / decompose-big-tasks
