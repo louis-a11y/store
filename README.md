@@ -162,6 +162,18 @@ bash ~/tools/skillstore/scripts/setup-machine.sh
 
 The script is idempotent — re-running it just refreshes the job. First sync establishes that machine's state; after that both directions flow every hour.
 
+## Plugins (MCP / agent components)
+
+Plugins live in `plugins/` — install via `bash scripts/install-plugins.sh [NAME]` or include in your bulk fetch with `plugins/index.json`. Catalog format mirrors `skills/index.json`. Same one-click logic for your other app: fetch `plugins/index.json`, then pull files from `plugins/<name>/`.
+
+Example `plugins/index.json` (already in repo):
+
+```json
+{"plugins": [{"name":"opencode-registry","version":"1","files":["opencode-registry.json"],"description":"..."}]}
+```
+
+The two plugins reference the registries the search found (mcp-marketplace, opencode-registry) — they're documented, not yet installed as runnable configs.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
