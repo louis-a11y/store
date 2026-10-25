@@ -64,13 +64,20 @@ def copy_to(src: Path, dest: Path) -> None:
         dest.unlink()
     elif dest.is_dir():
         shutil.rmtree(dest)
-    shutil.copytree(src, dest, symlinks=False, ignore=shutil.ignore_patterns(".DS_Store"))
+    shutil.copytree(src, dest, symlinks=False, ignore=shutil.ignore_patterns(".DS_Store", "profile.md"))
 
 
 def main() -> int:
     # 1. catch up with GitHub first (other devices' changes arrive here)
     if run("git", "status", "--porcelain"):
         run("git", "add", "-A")
+    # never commit personal profile files to the public store
+    for p in (REPO / "skills").rglob("profile.md"):
+        rel = p.relative_to(REPO).as_posix()
+        try:
+            run("git", "rm", "--cached", rel)
+        except Exception:
+            pass
         run("git", "commit", "-m", "sync: manual changes")
     try:
         run("git", "pull", "--rebase", "origin", BRANCH)
@@ -147,6 +154,13 @@ def main() -> int:
         print("store already in sync")
         return 0
     run("git", "add", "-A")
+    # never commit personal profile files to the public store
+    for p in (REPO / "skills").rglob("profile.md"):
+        rel = p.relative_to(REPO).as_posix()
+        try:
+            run("git", "rm", "--cached", rel)
+        except Exception:
+            pass
     summary = ", ".join(actions) if actions else "state refresh"
     run("git", "commit", "-m", f"sync: {summary}")
     try:
