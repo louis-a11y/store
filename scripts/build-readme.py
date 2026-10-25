@@ -11,7 +11,7 @@ header = f"# Skill Store  ({skills} skills / {plugins} plugin catalogs)\n\nA cur
 # inject header and replace the old hardcoded 36 mention in paragraph 1
 lines = t.splitlines()
 # replace first paragraph's number if still hardcoded
-new_first = f"A curated pack of {skills} skills + {plugins} plugin catalogs [opencode]"
+new_first = f"A curated pack of {skills} skills + {plugins} plugin catalogs, written and battle-tested by someone who actually ships with them daily — not scraped or auto-generated"
 for i, ln in enumerate(lines):
     if ln.startswith("A curated pack of"):
         lines[i] = new_first

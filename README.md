@@ -1,6 +1,6 @@
 # Skill Store  (39 skills / 1 plugin catalogs)
 
-A curated pack of 39 skills + 1 plugin catalogs [opencode]
+A curated pack of 39 skills + 1 plugin catalogs, written and battle-tested by someone who actually ships with them daily — not scraped or auto-generated
 
 ## Install
 
