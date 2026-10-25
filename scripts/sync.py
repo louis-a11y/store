@@ -128,6 +128,10 @@ def main() -> int:
     for stale in [n for n in state if n not in live and n not in store and n not in trashed]:
         del state[stale]
     run(sys.executable, str(REPO / "scripts/build-index.py"))
+    try:
+        run(sys.executable, str(REPO / "scripts/build-readme.py"))
+    except Exception as e:
+        print(f"! README refresh skipped: {e}")
     STATE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
 
     # 3. publish only if something changed

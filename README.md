@@ -1,6 +1,6 @@
-# Skill Store
+# Skill Store  (39 skills / 1 plugin catalogs)
 
-A curated pack of 36 [opencode](https://opencode.ai) skills, written and battle-tested by someone who actually uses them daily — not scraped or auto-generated. Skills are plain `SKILL.md` files plus supporting references. Fork them, edit them, vendor them — they're yours.
+A curated pack of 39 skills + 1 plugin catalogs [opencode]
 
 ## Install
 
