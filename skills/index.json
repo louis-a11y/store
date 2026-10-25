@@ -2,10 +2,9 @@
   "skills": [
     {
       "name": "about-me",
-      "version": "96e077c156",
+      "version": "04d99c5558",
       "files": [
-        "SKILL.md",
-        "profile.md"
+        "SKILL.md"
       ]
     },
     {
