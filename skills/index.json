@@ -58,13 +58,6 @@
       ]
     },
     {
-      "name": "create-skill",
-      "version": "a0cf005bec",
-      "files": [
-        "SKILL.md"
-      ]
-    },
-    {
       "name": "cross-compilation",
       "version": "972df1380e",
       "files": [
