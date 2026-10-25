@@ -14,6 +14,7 @@
   "dotfiles-backup": "6d28f76092eab615e8000ae904289c5595316c93",
   "elf-binutils": "0bc7b8a715fb617c7bdd5d76fecfa2af738b33e3",
   "error-analysis": "ae926ac1576c006a251ebca246602caf93516508",
+  "fetch-or-create-skill": "e58bffb38239cb83960eecb18b0b03d952b604a4",
   "homebrew-management": "874d963a65a936fc4c7596e2d5677c13774059e9",
   "kernel-debugging": "ee0136903089ad17a8a80d7697b5d0de1b230b00",
   "knowledge-base": "5a1025890415df8a56175d7a99e82d4e87063b60",

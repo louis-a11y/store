@@ -107,6 +107,13 @@
       ]
     },
     {
+      "name": "fetch-or-create-skill",
+      "version": "e58bffb382",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "homebrew-management",
       "version": "874d963a65",
       "files": [
