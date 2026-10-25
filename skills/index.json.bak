@@ -1,1 +1,0 @@
-{"plugins":[{"name":"mcp-marketplace","version":"1","files":["mcp-marketplace.json"],"description":"Marketplace discovery of MCP servers for open-code agents"},{"name":"opencode-registry","version":"1","files":["opencode-registry.json"],"description":"Curated opencode components — agents, subagents, skills, commands"}]}
