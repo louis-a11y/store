@@ -100,8 +100,15 @@
       ]
     },
     {
+      "name": "fetch-or-create-plugin",
+      "version": "ec65f88ae8",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "fetch-or-create-skill",
-      "version": "e58bffb382",
+      "version": "0e649286be",
       "files": [
         "SKILL.md"
       ]

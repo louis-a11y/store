@@ -1,5 +1,5 @@
 {
-  "about-me": "96e077c156d8a1200d312b3cccec0d22f74ef0c0",
+  "about-me": "04d99c5558925e0ce8789afe56c4e561bee4845d",
   "api-testing": "b12ae644118f6a57cf27372f6219e3e8a0086e9d",
   "attachment-reading": "920e575c2903562bd4a97be67946e0bd84a1f2dd",
   "background-job": "39a4e54ee9c561ea1168c11c285c64f77ecf86c6",
@@ -14,7 +14,8 @@
   "dotfiles-backup": "6d28f76092eab615e8000ae904289c5595316c93",
   "elf-binutils": "0bc7b8a715fb617c7bdd5d76fecfa2af738b33e3",
   "error-analysis": "ae926ac1576c006a251ebca246602caf93516508",
-  "fetch-or-create-skill": "e58bffb38239cb83960eecb18b0b03d952b604a4",
+  "fetch-or-create-plugin": "ec65f88ae87c7ab59c18191434c434e415a5dbbb",
+  "fetch-or-create-skill": "0e649286be1df37ba8414f6467640a530cf2549f",
   "homebrew-management": "874d963a65a936fc4c7596e2d5677c13774059e9",
   "kernel-debugging": "ee0136903089ad17a8a80d7697b5d0de1b230b00",
   "knowledge-base": "5a1025890415df8a56175d7a99e82d4e87063b60",

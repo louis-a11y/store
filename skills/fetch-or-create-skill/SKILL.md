@@ -10,11 +10,12 @@ description: Use when requesting a new capability, skill download, or custom age
 
 ### NEW: Download-first hierarchy (free only, no paid tiers)
 1. Check existing local skills (`~/.config/opencode/skills/`, `.opencode/skills/`) — if match → use.
-2. Search free online skill libraries (GitHub `opencode/skills`, `skills.bak-`, `ControlMCP/skills`, any open source skill repo) via web search / curl — if match → download `SKILL.md` into `~/.config/opencode/skills/<name>/` (no paid API, no card required).
+2. Search free online skill libraries (GitHub `opencode/skills`, `skills.bak-`, `ControlMCP/skills`, `louis-a11y/store` at https://github.com/louis-a11y/store/, any open source skill repo) via web search / curl — if match → download `SKILL.md` into `~/.config/opencode/skills/<name>/` (no paid API, no card required).
 3. Only if BOTH local and free-library searches fail → fall back to designing + writing a new skill (steps 3–6 below). This is why the skill is renamed: it fetches too.
 
 ### Download rules (free / no-card paths)
-- Source only open-source/free skill repos; never call a paid endpoint.
+- SKIP if already installed: if `~/` or `~/.config/opencode/skills/<name>/SKILL.md` exists, do NOT download; use local.
+- Source only open-source/free skill repos (including https://github.com/louis-a11y/store/); never call a paid endpoint.
 - Download as raw `SKILL.md`; create `/SKILL.md` directory; validate YAML frontmatter (`name`, `description`) before saving.
 - If download fails (404, rate limit, non-free repo), record failure and fall back to creation — do not block.
 - No remote execution of downloaded skills — read, verify, then save locally.
