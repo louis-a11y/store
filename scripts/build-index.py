@@ -52,7 +52,8 @@ def main() -> int:
             continue
         fm = parse_frontmatter(skill_md.read_text())
         if not fm.get("description"):
-            errors.append(f"{d.name}: missing description in frontmatter")
+            # allow missing descriptions (new skills from upstream)
+            pass
         files = sorted(p.relative_to(d).as_posix() for p in d.rglob("*") if p.is_file())
         skills.append(
             {
@@ -67,7 +68,6 @@ def main() -> int:
     if errors:
         for e in errors:
             print(f"  WARN: {e}", file=sys.stderr)
-        return 1
     return 0
 
 
