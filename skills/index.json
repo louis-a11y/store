@@ -58,6 +58,13 @@
       ]
     },
     {
+      "name": "context-prune",
+      "version": "2c2fc8ef6e",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "controlmcp",
       "version": "4eb6a081a9",
       "files": [
@@ -142,6 +149,13 @@
       ]
     },
     {
+      "name": "fountain-qr-debug",
+      "version": "77ee94a724",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "frontend-design",
       "version": "cc4020de96",
       "files": [
@@ -186,6 +200,13 @@
     {
       "name": "memory-notes",
       "version": "7e4cffca26",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "multimodal-endpoint-wiring",
+      "version": "cab4b7530b",
       "files": [
         "SKILL.md"
       ]
@@ -305,6 +326,13 @@
     {
       "name": "testing",
       "version": "7943dcb8b2",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "vibeos-review",
+      "version": "cf4eef5aed",
       "files": [
         "SKILL.md"
       ]
