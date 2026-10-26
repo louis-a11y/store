@@ -37,6 +37,13 @@
       ]
     },
     {
+      "name": "code-review",
+      "version": "67832ccf8c",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "computer-control",
       "version": "a42e0ec355",
       "files": [
@@ -72,8 +79,29 @@
       ]
     },
     {
+      "name": "data-analysis",
+      "version": "525213766b",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "debugging",
+      "version": "6d62789fba",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "dev-workflow",
       "version": "3ac20648b4",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "docx",
+      "version": "45a3e6b248",
       "files": [
         "SKILL.md"
       ]
@@ -109,6 +137,13 @@
     {
       "name": "fetch-or-create-skill",
       "version": "0e649286be",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "frontend-design",
+      "version": "cc4020de96",
       "files": [
         "SKILL.md"
       ]
@@ -151,6 +186,13 @@
     {
       "name": "memory-notes",
       "version": "7e4cffca26",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "multimodal-extension",
+      "version": "701dfffd5e",
       "files": [
         "SKILL.md"
       ]
@@ -261,6 +303,13 @@
       ]
     },
     {
+      "name": "testing",
+      "version": "7943dcb8b2",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "vite-workflow",
       "version": "f46f4c2fe2",
       "files": [
@@ -275,8 +324,29 @@
       ]
     },
     {
+      "name": "web-research",
+      "version": "22fe45548f",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "web-search",
+      "version": "04ccb28ef9",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "work-faster",
-      "version": "084f3941a5",
+      "version": "8d9ff73ff0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "xlsx",
+      "version": "01d4ec8dd7",
       "files": [
         "SKILL.md"
       ]

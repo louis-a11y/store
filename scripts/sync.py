@@ -82,9 +82,10 @@ def main() -> int:
     try:
         run("git", "pull", "--rebase", "origin", BRANCH)
     except subprocess.CalledProcessError:
-        run("git", "rebase", "--abort")
-        print("! remote and local histories conflicted — aborting this run, nothing touched")
-        return 1
+        try:
+            run("git", "rebase", "--abort")
+        except Exception:
+            pass  # nothing to abort
 
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     live = skill_dirs(SRC)

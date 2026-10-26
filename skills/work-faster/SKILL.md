@@ -9,7 +9,7 @@ Fire independent work in parallel, load only the context you need, stop searchin
 
 ## 1. Parallel execution — wave, don't chain
 
-Available sub-agents (defined in `opencode.jsonc`): `architect`, `coder`, `sysadmin`, `reviewer`, `tester`, `docs`. Built-in: `explore` (codebase grep, cheap), `general` (multi-step).
+Built-in sub-agents are: `explore` (codebase grep, cheap), `general` (multi-step). Check /Users/superlouisyt/.config/opencode/opencode.jsonc for the other available sub-agents
 
 ```text
 # CORRECT — one wave, all independent, nothing waited on:
